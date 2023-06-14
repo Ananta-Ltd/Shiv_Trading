@@ -1,0 +1,8 @@
+shiv_trading_backend/.env
+shiv_trading_backend/.idea/
+shiv_trading_backend/__pycache__/
+shiv_trading_backend/core/__pycache__/
+shiv_trading_backend/db/__pycache__/
+shiv_trading_backend/routers/__pycache__/
+venv
+.idea
