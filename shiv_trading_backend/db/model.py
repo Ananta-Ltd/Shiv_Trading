@@ -27,7 +27,7 @@ class product(base):
 
 
 class size(base):
-    __tablename__="tilesize"
+    __tablename__="sizes"
 
     s_id=Column(Integer,autoincrement=True,primary_key=True)
     sizes=Column(String,nullable=False)
@@ -41,7 +41,7 @@ class rooms(base):
 
 
 class cpfittings(base):
-    __tablename__="fittings"
+    __tablename__="cpfittings"
 
     fitting_id=Column(Integer,primary_key=True)
     fitting_name=Column(String, nullable=False)
@@ -50,17 +50,20 @@ class cpfittings(base):
 class product_room_size(base):
     __tablename__="product_room_size"
 
-    p_size_id=Column(Integer,autoincrement=True,primary_key=True)
+    prs_id=Column(Integer,autoincrement=True,primary_key=True)
     p_id=Column(Integer,ForeignKey("product"))
     room_id=Column(Integer,ForeignKey("rooms"))
-    s_id=Column(Integer,ForeignKey("tilesize"))
-    photos=Column(String,nullable=True)
+    s_id=Column(Integer,ForeignKey("sizes"))
 
 
+class photos(base):
+    __tablename__="photos"
 
+    photo_id=Column(Integer,primary_key = True)
+    photo_address=Column(String,nullable = False,unique = True)
 class product_fitting(base):
     __tablename__="product_fitting"
 
     p_fitting_id=Column(Integer,primary_key=True)
     p_id=Column(Integer,ForeignKey("product"))
-    fitting_id=Column(Integer,ForeignKey("fittings"))
+    fitting_id=Column(Integer,ForeignKey("cpfittings"))
