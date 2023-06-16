@@ -7,6 +7,7 @@ class user(BaseModel):
     country_code:str
     phone_number:str
     plan:Optional[str]="basic"
+    is_superuser:Optional[bool]=False
     class config:
         orm_mode:True
 
@@ -99,3 +100,21 @@ class product_fitting(add_product_fitting):
 
         class config:
             orm_mode:True
+
+
+class tiles_photos(BaseModel):
+    photo_id:int
+    photo_address:str
+    prs_id:int
+
+    class config:
+        orm_mode:True
+
+
+class CPPhotos(BaseModel):
+    rem_id:int
+    rem_photos_address:str
+    p_id:int
+
+    class config:
+        orm_mode:True

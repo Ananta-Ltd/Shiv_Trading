@@ -1,5 +1,5 @@
 from .dbconnect import base
-from sqlalchemy import String,Integer,Column,ForeignKey
+from sqlalchemy import String,Integer,Column,ForeignKey,Boolean,Text
 
 
 class user(base):
@@ -10,6 +10,7 @@ class user(base):
     country_code=Column(String,nullable=False)
     phone_number = Column(String, unique=True, nullable=False)
     plan=Column(String,nullable=False)
+    is_superuser=Column(Boolean)
 
 class login(base):
     __tablename__= "login"
@@ -30,7 +31,7 @@ class size(base):
     __tablename__="sizes"
 
     s_id=Column(Integer,autoincrement=True,primary_key=True)
-    sizes=Column(String,nullable=False)
+    sizes=Column(Text,nullable=False)
 
 
 class rooms(base):
@@ -56,14 +57,26 @@ class product_room_size(base):
     s_id=Column(Integer,ForeignKey("sizes"))
 
 
-class photos(base):
-    __tablename__="photos"
+class tiles_photos(base):
+    __tablename__="tiles_photos"
 
     photo_id=Column(Integer,primary_key = True)
     photo_address=Column(String,nullable = False,unique = True)
+    prs_id=Column(Integer, ForeignKey("product_room_size"))
+
+
+
 class product_fitting(base):
     __tablename__="product_fitting"
 
     p_fitting_id=Column(Integer,primary_key=True)
     p_id=Column(Integer,ForeignKey("product"))
     fitting_id=Column(Integer,ForeignKey("cpfittings"))
+
+
+class CPPhotos(base):
+    __tablename__="rem_photos"
+
+    rem_id=Column(Integer,primary_key = True)
+    rem_photo_address=Column(String,nullable = False)
+    p_id=Column(Integer,ForeignKey("product"))
