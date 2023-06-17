@@ -3,8 +3,7 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 from routers import routers
 import psycopg2
-from psycopg2 import sql
-from db.dbconnect import engine
+import codecs
 
 app = FastAPI()
 
@@ -31,7 +30,7 @@ async def startup_event():
     # Fetch the result
     row_count = cursor.fetchone()[0]
     if row_count==0:
-        with open("data.sql", "r") as sql_file:
+        with codecs.open("data.sql", "r", encoding = "utf-8") as sql_file:
             sql_commands = sql_file.read()
 
         # Execute the SQL commands
