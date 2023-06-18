@@ -14,16 +14,9 @@ function AdminNavbar() {
 
   return (
     
-<<<<<<< HEAD
     <>
          <nav className="w-full shadow-lg ">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
-=======
-    <div>
-      <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-[10]">
-         <nav className="w-full shadow-lg  ">
-        <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8 ">
->>>>>>> 32b86dbb6cee17c1ea2af3b45202be1447aa1531
           <div>
             <div className="flex items-center justify-between py-2 md:py-1 md:block"
             onMouseLeave={() => setDropDown(false)}>
@@ -75,7 +68,6 @@ function AdminNavbar() {
                 navbar ? 'block' : 'hidden'
               }`}
             >
-<<<<<<< HEAD
               <ul className="items-center font-bold text-xs tracking-[1px] space-y-8 p-3 md:flex md:space-x-6 md:space-y-0">
                 <li className="pl-4  "
                    onMouseEnter={() => setDropDown(true)}
@@ -85,12 +77,6 @@ function AdminNavbar() {
                 <div className='mr-1'>
                   <Link href="" className={styles.link}> 
                   PRODUCTS
-=======
-              <ul className="items-center space-y-8 p-3 md:flex md:space-x-6 md:space-y-0">
-                <li className="pl-4">
-                  <Link href="/product" className={styles.link}>
-                  Product
->>>>>>> 32b86dbb6cee17c1ea2af3b45202be1447aa1531
                   </Link>
                 </div>
                 <div className='mt-0.5'><BsFillCaretDownFill/></div>
@@ -100,16 +86,10 @@ function AdminNavbar() {
                 {navbar&& mobiledropDown && <div className='md:hidden'><Dropdown/></div>}
                 </div>
                 </li>
-<<<<<<< HEAD
                 <li className="pl-4"
                  onMouseEnter={() => setDropDown(false)}>
                   <Link href="/about" className={styles.link} >
                     WHERE TO BUY
-=======
-                <li className="pl-4">
-                  <Link href="/where" className={styles.link} >
-                    Where to buy
->>>>>>> 32b86dbb6cee17c1ea2af3b45202be1447aa1531
                   </Link>
                   
                 </li>
@@ -121,21 +101,13 @@ function AdminNavbar() {
                 </li>
                 <li className="pl-4">
                   <Link href="/login" className={styles.link}>
-<<<<<<< HEAD
                     LOGIN
-=======
-                    Login
->>>>>>> 32b86dbb6cee17c1ea2af3b45202be1447aa1531
                   </Link>
                   
                 </li>
                 <li className="pl-4">
                   <Link href="/signup" className={styles.link}>
-<<<<<<< HEAD
                     SIGNUP
-=======
-                    Signup
->>>>>>> 32b86dbb6cee17c1ea2af3b45202be1447aa1531
                   </Link> 
                 </li>
                
@@ -144,16 +116,11 @@ function AdminNavbar() {
           </div>
         </div>
       </nav>
-<<<<<<< HEAD
       <div className='hidden md:block lg:block'
         onMouseLeave={() => setDropDown(false)}>
         { dropDown && <Dropdown/>}
       </div>
     </>
-=======
-      </header>
-    </div>
->>>>>>> 32b86dbb6cee17c1ea2af3b45202be1447aa1531
 
    
   )
