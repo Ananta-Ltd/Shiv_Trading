@@ -11,8 +11,9 @@ function AdminNavbar() {
   return (
     
     <div>
-         <nav className="w-full shadow-lg ">
-        <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+      <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-[10]">
+         <nav className="w-full shadow-lg  ">
+        <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8 ">
           <div>
             <div className="flex items-center justify-between py-2 md:py-1 md:block">
               <Link href="/">
@@ -62,15 +63,15 @@ function AdminNavbar() {
                 navbar ? 'block' : 'hidden'
               }`}
             >
-              <ul className="items-center text-sm space-y-8 p-3 md:flex md:space-x-6 md:space-y-0">
+              <ul className="items-center space-y-8 p-3 md:flex md:space-x-6 md:space-y-0">
                 <li className="pl-4">
-                  <Link href="/about" className={styles.link}>
+                  <Link href="/product" className={styles.link}>
                   Product
                   </Link>
                   
                 </li>
                 <li className="pl-4">
-                  <Link href="/about" className={styles.link} >
+                  <Link href="/where" className={styles.link} >
                     Where to buy
                   </Link>
                   
@@ -82,13 +83,13 @@ function AdminNavbar() {
                   
                 </li>
                 <li className="pl-4">
-                  <Link href="/about" className={styles.link}>
+                  <Link href="/login" className={styles.link}>
                     Login
                   </Link>
                   
                 </li>
                 <li className="pl-4">
-                  <Link href="/about" className={styles.link}>
+                  <Link href="/signup" className={styles.link}>
                     Signup
                   </Link> 
                 </li>
@@ -98,6 +99,7 @@ function AdminNavbar() {
           </div>
         </div>
       </nav>
+      </header>
     </div>
 
    
