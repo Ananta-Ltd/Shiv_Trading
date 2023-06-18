@@ -1,7 +1,7 @@
 "use client";
 import Products from "./components/Products_offered";
 import Trending from "./components/Trending_product";
-import { FaLessThan, FaGreaterThan } from "react-icons/fa";
+import { AiOutlineLeftCircle, AiOutlineRightCircle } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import tiles1 from "../public/images/tiles1.jpg";
@@ -33,28 +33,34 @@ function Home() {
 
   return (
     <>
-      <div className="slider my-5 mx-20">
-        <Image
-          className="  rounded md: h-96  lg:h-[35rem] w-[100rem]"
-          src={images[currentImage]}
-          alt="Carousel Image"
-        />
-
-        <button
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg"
+      <div className="slider m-2 mt-0 flex justify-center">
+     <div className="relative">
+     <button
+          className="absolute left-0 top-[200px] text-white"
           onClick={handlePrevious}
         >
-          <FaLessThan />
+          <AiOutlineLeftCircle />
         </button>
+        <Image
+          className="h-[400px] w-[1200px] "
+          src={images[currentImage]}
+          alt="Carousel Image"
+        />   
         <button
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg"
+          className="absolute right-0 top-[200px] text-white"
           onClick={handleNext}
         >
-          <FaGreaterThan />
+          <AiOutlineRightCircle />
         </button>
+     </div>
       </div>
       <Products />
       <Trending />
+      <div className="flex justify-center m-9">
+      <div className="bg-gray-100 h-[600px] w-3/4 ">
+        ABOUT US
+      </div>
+      </div>
     </>
   );
 }

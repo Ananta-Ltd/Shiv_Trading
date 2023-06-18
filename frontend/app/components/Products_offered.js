@@ -13,7 +13,7 @@ import Image from "next/image";
 function Products() {
   return (
     <>
-      <p className="bg-gray-300 text-center mb-0 mx-[70px] my-[20px] font-bold text-4xl  font-serif animate-pulse">
+      {/* <p className="bg-gray-300 text-center mb-0 mx-[70px] my-[20px] font-bold text-4xl  font-serif animate-pulse">
         we offer
       </p>
       <div className="mx-[70px] my-[20px] mt-0">
@@ -163,6 +163,53 @@ function Products() {
             </div>
           </div>
         </div>
+      </div> */}
+         <div className=" p-2 m-12 h-auto md:h-[500px] ">
+         <div className="flex justify-center">
+        <h1 className="font-semibold text-[24px]  tracking-[2px] text-center "> EXPLORE OUR WALL TILES </h1>     
+        <div className="bg-gray-500 h-0.5 w-[220px] mt-11 absolute center"></div>
+         </div>
+     <div className="block md:flex justify-center">
+      <div className="mt-9 p-7 mx-4 w-[250px] h-[405px] bg-blue-950">
+        <p>lorem 
+        </p>
+      </div>
+      <div>
+    
+       <div className="block md:flex lg:flex justify-center mt-9 mb-1">
+        <div className="bg-blue-950 h-[200px] w-[250px] mx-1 mb-1 md:mb-0 lg:mb-0"></div>
+        <div className="bg-blue-950 h-[200px]  w-[250px] md:w-[500px]"></div>
+       </div>
+       <div className="block md:flex lg:flex justify-center mb-9">
+        <div className="bg-blue-950 h-[200px]  w-[250px] md:w-[500px] mx-1 mb-1 md:mb-0 lg:mb-0"></div>
+        <div className="bg-blue-950 h-[200px] w-[250px] "></div>
+       </div>
+      </div>
+     </div>
+      </div>
+         <div className=" p-2 m-12 h-auto md:h-[500px] ">
+         <div className="flex justify-center">
+        <h1 className="font-semibold text-[24px]  tracking-[2px] text-center "> EXPLORE OUR FLOOR TILES </h1>     
+        <div className="bg-gray-500 h-0.5 w-[220px] mt-11 absolute center"></div>
+         </div>
+     <div className="block md:flex justify-center">
+      
+      <div>
+       <div className="block md:flex lg:flex justify-center mt-9 mb-1">
+        <div className="bg-blue-950 h-[200px] w-[250px] mx-1 mb-1 md:mb-0 lg:mb-0"></div>
+        <div className="bg-blue-950 h-[200px]  w-[250px] md:w-[500px]"></div>
+       </div>
+       <div className="block md:flex lg:flex justify-center mb-9">
+        <div className="bg-blue-950 h-[200px]  w-[250px] md:w-[500px] mx-1 mb-1 md:mb-0 lg:mb-0"></div>
+        <div className="bg-blue-950 h-[200px] w-[250px] "></div>
+       </div>
+      </div>
+      <div className="mt-9 p-7 mx-4 w-[250px] h-[405px] bg-blue-950">
+        <p>lorem 
+        </p>
+      </div>
+     </div>
+   
       </div>
     </>
   );

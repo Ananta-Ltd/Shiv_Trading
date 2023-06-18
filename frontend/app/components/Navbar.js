@@ -11,11 +11,28 @@ function AdminNavbar() {
    const [navbar, setNavbar] = useState(false);
    const [dropDown, setDropDown] = useState(false);
    const [mobiledropDown, setmobileDropDown] = useState(false);
+   const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     
     <>
-         <nav className="w-full shadow-lg ">
+         <nav className={`w-full  sticky top-0 z-10 bg-white  ${ scrolled ? 'shadow-lg' : ''}`}>
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-2 md:py-1 md:block"
@@ -68,7 +85,7 @@ function AdminNavbar() {
                 navbar ? 'block' : 'hidden'
               }`}
             >
-              <ul className="items-center font-bold text-xs tracking-[1px] space-y-8 p-3 md:flex md:space-x-6 md:space-y-0">
+              <ul className="items-center text-sm font-semibold tracking-[1px] space-y-8 p-3 md:flex md:space-x-6 md:space-y-0">
                 <li className="pl-4  "
                    onMouseEnter={() => setDropDown(true)}
                    >
@@ -88,7 +105,7 @@ function AdminNavbar() {
                 </li>
                 <li className="pl-4"
                  onMouseEnter={() => setDropDown(false)}>
-                  <Link href="/about" className={styles.link} >
+                  <Link href="/where" className={styles.link} >
                     WHERE TO BUY
                   </Link>
                   
