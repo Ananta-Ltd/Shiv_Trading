@@ -13,7 +13,7 @@ import Image from "next/image";
 function Products() {
   return (
     <>
-      <p className="bg-gray-300 text-center mb-0 mx-[70px] my-[20px] font-bold text-7xl text-lime-700 font-serif animate-pulse">
+      <p className="bg-gray-300 text-center mb-0 mx-[70px] my-[20px] font-bold text-4xl  font-serif animate-pulse">
         we offer
       </p>
       <div className="mx-[70px] my-[20px] mt-0">

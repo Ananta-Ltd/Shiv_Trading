@@ -1,5 +1,6 @@
 "use client";
 import Products from "./components/Products_offered";
+import Trending from "./components/Trending_product";
 import { FaLessThan, FaGreaterThan } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -53,6 +54,7 @@ function Home() {
         </button>
       </div>
       <Products />
+      <Trending />
     </>
   );
 }
