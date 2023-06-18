@@ -1,20 +1,25 @@
 "use client"
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import logo from "../../public/images/shivlogo.png";
 import Image from 'next/image';
 import styles from '../Line.module.css';
+import Dropdown from './Dropdown';
+import { BsFillCaretDownFill } from "react-icons/bs";
 
 function AdminNavbar() {
    const [navbar, setNavbar] = useState(false);
+   const [dropDown, setDropDown] = useState(false);
+   const [mobiledropDown, setmobileDropDown] = useState(false);
 
   return (
     
-    <div>
+    <>
          <nav className="w-full shadow-lg ">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
-            <div className="flex items-center justify-between py-2 md:py-1 md:block">
+            <div className="flex items-center justify-between py-2 md:py-1 md:block"
+            onMouseLeave={() => setDropDown(false)}>
               <Link href="/">
               <Image className='w-[65px]' src={logo} alt="logo"></Image>
               </Link>
@@ -22,6 +27,7 @@ function AdminNavbar() {
                 <button
                   className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
                   onClick={() => setNavbar(!navbar)}
+                  
                 >
                   {navbar ? (
                     <svg
@@ -62,34 +68,46 @@ function AdminNavbar() {
                 navbar ? 'block' : 'hidden'
               }`}
             >
-              <ul className="items-center text-sm space-y-8 p-3 md:flex md:space-x-6 md:space-y-0">
-                <li className="pl-4">
-                  <Link href="/about" className={styles.link}>
-                  Product
+              <ul className="items-center font-bold text-xs tracking-[1px] space-y-8 p-3 md:flex md:space-x-6 md:space-y-0">
+                <li className="pl-4  "
+                   onMouseEnter={() => setDropDown(true)}
+                   >
+                <div className='flex'
+                 onClick={() => setmobileDropDown(!mobiledropDown)}>
+                <div className='mr-1'>
+                  <Link href="" className={styles.link}> 
+                  PRODUCTS
                   </Link>
-                  
+                </div>
+                <div className='mt-0.5'><BsFillCaretDownFill/></div>
+                
+                </div>
+                <div>
+                {navbar&& mobiledropDown && <div className='md:hidden'><Dropdown/></div>}
+                </div>
                 </li>
-                <li className="pl-4">
+                <li className="pl-4"
+                 onMouseEnter={() => setDropDown(false)}>
                   <Link href="/about" className={styles.link} >
-                    Where to buy
+                    WHERE TO BUY
                   </Link>
                   
                 </li>
                 <li className="pl-4" >
                   <Link href="/about" className={styles.link}>
-                    About
+                    ABOUT
                   </Link>
                   
                 </li>
                 <li className="pl-4">
-                  <Link href="/about" className={styles.link}>
-                    Login
+                  <Link href="/login" className={styles.link}>
+                    LOGIN
                   </Link>
                   
                 </li>
                 <li className="pl-4">
-                  <Link href="/about" className={styles.link}>
-                    Signup
+                  <Link href="/signup" className={styles.link}>
+                    SIGNUP
                   </Link> 
                 </li>
                
@@ -98,7 +116,11 @@ function AdminNavbar() {
           </div>
         </div>
       </nav>
-    </div>
+      <div className='hidden md:block lg:block'
+        onMouseLeave={() => setDropDown(false)}>
+        { dropDown && <Dropdown/>}
+      </div>
+    </>
 
    
   )

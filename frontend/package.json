@@ -1,5 +1,5 @@
 {
-  "name": "tourist",
+ "name": "tourist",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,10 +10,17 @@
   },
   "dependencies": {
     "autoprefixer": "10.4.14",
-    "next": "13.4.4",
+    "axios": "^1.4.0",
+    "cssesc": "^3.0.0",
+    "formik": "^2.4.2",
+    "middleware": "^1.0.0",
+    "next": "13.4.3",
+    "next-auth": "^4.22.1",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tailwindcss": "3.3.2"
+    "react-icons": "^4.9.0",
+    "tailwindcss": "3.3.2",
+    "yup": "^1.2.0"
   }
 }

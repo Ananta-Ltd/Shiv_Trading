@@ -1,10 +1,9 @@
 .link {
     color: rgb(0, 0, 0);
-    font-size: 16px;
-    margin: 18px;
     text-decoration: none;
     position: relative;
     opacity: 0.9;
+    
 }
 
 .link:hover {
