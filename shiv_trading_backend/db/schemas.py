@@ -58,10 +58,8 @@ class rooms(add_rooms):
             orm_mode: True
 
 
-class add_cpfittings(BaseModel):
-    fitting_name:str
-
-class cpfittings(add_cpfittings):
+class cpfittings(BaseModel):
+        fitting_name: str
         fitting_id:int
 
         class config:
@@ -90,12 +88,10 @@ class product_room(BaseModel):
             orm_mode:True
 
 
-class add_product_fitting(BaseModel):
-        p_id:int
-        fitting_id:int
 
-
-class product_fitting(add_product_fitting):
+class product_fitting(BaseModel):
+        p_id: int
+        fitting_id: int
         p_fitting_id:int
 
         class config:
@@ -118,3 +114,43 @@ class CPPhotos(BaseModel):
 
     class config:
         orm_mode:True
+
+
+class UploadTilesPhoto(BaseModel):
+    product:str
+    room:str
+    size:str
+
+
+class Granite(BaseModel):
+
+    granite_id:int
+    category:str
+
+    class config:
+        orm_mode:True
+
+class Thick(BaseModel):
+
+    thick_id:int
+    thick:str
+
+    class config:
+        orm_mode:True
+
+
+class GraniteThick(BaseModel):
+
+    gt_id:int
+    granite_id:int
+    thick_id:int
+
+    class config:
+        orm_mode:True
+
+
+class GranitePhotos(BaseModel):
+
+    gp_id:int
+    photo_address:str
+    gt_id:int

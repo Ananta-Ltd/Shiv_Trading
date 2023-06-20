@@ -74,9 +74,39 @@ class product_fitting(base):
     fitting_id=Column(Integer,ForeignKey("cpfittings"))
 
 
-class CPPhotos(base):
-    __tablename__="rem_photos"
 
-    rem_id=Column(Integer,primary_key = True)
-    rem_photo_address=Column(String,nullable = False)
+class CPPhotos(base):
+    __tablename__="cpphotos"
+
+    cp_id=Column(Integer,primary_key = True)
+    photo_address=Column(String,nullable = False)
+    p_fitting_id=Column(Integer,ForeignKey("product_fitting"))
+
+
+class Granite(base):
+    __tablename__="granites"
+
+    granite_id=Column(Integer,autoincrement = True,primary_key = True)
+    category=Column(String,nullable = False)
     p_id=Column(Integer,ForeignKey("product"))
+
+class Thick(base):
+    __tablename__="thick"
+
+    thick_id=Column(Integer,autoincrement = True,primary_key = True)
+    thick=Column(String,nullable = False)
+
+class GraniteThick(base):
+    __tablename__="granitethick"
+
+    gt_id=Column(Integer,autoincrement = True,primary_key = True)
+    granite_id=Column(Integer,ForeignKey("granites"))
+    thick_id=Column(Integer,ForeignKey("thick"))
+
+
+class GranitePhotos(base):
+    __tablename__="granitephoto"
+
+    gp_id=Column(Integer,autoincrement = True,primary_key = True)
+    photo_address=Column(String,nullable = False)
+    gt_id=Column(Integer,ForeignKey("granitethick"))

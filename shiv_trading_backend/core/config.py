@@ -9,6 +9,9 @@ class Settings(BaseSettings):
     ALGORITHM:str
     SECRET_KEY:str
     TOKEN_EXPIRY_LIMIT:int
+    IMAGEKIT_PRIVATE_KEY:str
+    IMAGEKIT_PUBLIC_KEY:str
+    IMAGEKIT_URL:str
     class Config:
         env_file='./.env'
 
