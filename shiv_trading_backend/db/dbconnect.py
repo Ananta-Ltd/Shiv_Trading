@@ -9,7 +9,7 @@ password=settings.DATABASE_PASSWORD
 port=settings.DATABASE_PORT 
 name=settings.DATABASE_NAME
 
-url=f"postgresql://{user}:{password}@{host}/{name}?client_encoding=utf-8"
+url=f"postgresql://{user}:{password}@{host}:{port}/{name}?client_encoding=utf-8"
 
 engine=create_engine(url)
 session=sessionmaker(autoflush=False, bind=engine)
