@@ -12,7 +12,7 @@ import styles from '../Footer.module.css';
 function Footer() {
 	return (
 		<>
-			<div className="h-1/16 w-full flex md:flex-row flex-col justify-around items-start p-1 sm:pt-8 lg:px-8 px-4 bg-blue-950 mt-9" >
+			<div className="h-1/16 w-full flex md:flex-row flex-col justify-around items-start p-1 sm:pt-8 lg:px-8 px-4 bg-blue-950 mt-9 " >
 				<div className="p-2 ">
 					<ul>
               <Link href="/">
