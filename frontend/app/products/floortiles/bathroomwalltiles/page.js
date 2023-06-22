@@ -3,7 +3,8 @@ import useFetch from '@/app/useFetch';
 
 const page = () =>{
   const url="Wall Tiles";
-  const {data:photos, loading, error} = useFetch(`http://localhost:8000/tiles/?product=${url}`)
+  const room = "Bathroom"
+  const {data:photos, loading, error} = useFetch(`http://localhost:8000/tiles/?product=${url}&room=${room}`)
   if(loading) return <h1>LOADING...</h1>;
   if(error) console.log(error);
   return (

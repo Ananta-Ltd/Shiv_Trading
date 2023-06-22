@@ -1,11 +1,36 @@
+"use client"
 import React from 'react'
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 function Search() {
     const [isChecked, setIsChecked] = useState(false);
+    const [isWallTiles, setIsWallTiles] = useState(false);
+    const [isFloorTiles, setIsFloorTiles] = useState(false);
+    const [isMAGTiles, setIsMAGTiles] = useState(false);
+    const [isPACTiles, setIsPACTiles] = useState(false);
+    const currentPage = usePathname();
+    const router = useRouter();
 
     const handleCheckboxChange = () => {
       setIsChecked(!isChecked);
+    };
+    const handleCheckboxChangewalltiles = () => {
+      router.push('/products/walltiles');
+      setIsWallTiles(!isWallTiles);
+    };
+    const handleCheckboxChangefloortiles = () => {
+      router.push('/products/floortiles');
+      setIsFloorTiles(!isFloorTiles);
+    };
+    const handleCheckboxChangemagtiles = () => {
+      router.push('/products/granitesandmarbles');
+      setIsMAGTiles(!isMAGTiles);
+    };
+    const handleCheckboxChangepactiles = () => {
+      router.push('/products/sanitaryandcp_fittings');
+      setIsPACTiles(!isPACTiles);
     };
   
   return (
@@ -17,8 +42,8 @@ function Search() {
         <input
          className="mx-2"
           type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
+          checked={isWallTiles}
+          onChange={handleCheckboxChangewalltiles}
         />
         Wall Tiles
       </label>
@@ -29,8 +54,8 @@ function Search() {
         <input
          className="mx-2"
           type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
+          checked={isFloorTiles}
+          onChange={handleCheckboxChangefloortiles}
         />
         Floor Tiles
       </label>
@@ -41,8 +66,8 @@ function Search() {
         <input
          className="mx-2"
           type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
+          checked={isPACTiles}
+          onChange={handleCheckboxChangepactiles}
         />
         Sanitary and C.P. Fittings
       </label>
@@ -53,8 +78,8 @@ function Search() {
         <input
          className="mx-2"
           type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
+          checked={isMAGTiles}
+          onChange={handleCheckboxChangemagtiles}
         />
         Granite and Marbles
       </label>
