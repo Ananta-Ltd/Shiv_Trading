@@ -1,4 +1,4 @@
-init.sql
+init-scripts/create_database.sql
 shiv_trading_backend/.env
 shiv_trading_backend/.idea/
 shiv_trading_backend/__pycache__/

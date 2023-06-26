@@ -2,10 +2,14 @@ from fastapi import FastAPI
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers import routers
+from routers import routers,router_post,router_get
 import psycopg2
 import codecs
 from core.config import settings
+<<<<<<< HEAD
+=======
+from db.dbconnect import create_database
+>>>>>>> b52bef0efb85df030c3a68a0c6d9297baee0a3c0
 
 app = FastAPI()
 
@@ -16,6 +20,7 @@ def welcome():
 
 @app.on_event("startup")
 async def startup_event():
+    create_database()
     conn = psycopg2.connect(
         dbname = settings.DATABASE_NAME,
         user = settings.DATABASE_USER,
@@ -43,7 +48,8 @@ async def startup_event():
 
 
 app.include_router(routers.router)
-
+app.include_router(router_post.router)
+app.include_router(router_get.router)
 
 
 origins = [
@@ -59,3 +65,4 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+

@@ -1,3 +1,4 @@
+from sqlalchemy.exc import ProgrammingError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
@@ -15,6 +16,12 @@ engine=create_engine(url)
 session=sessionmaker(autoflush=False, bind=engine)
 base=declarative_base()
 
+
+def create_database():
+    try:
+        engine.connect()
+    except ProgrammingError:
+        base.metadata.create_all(bind = engine)
 def get_database():
     db=session()
     try:
