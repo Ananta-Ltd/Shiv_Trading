@@ -3,6 +3,7 @@ import React from 'react'
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation'
 
 function Search() {
     const [isChecked, setIsChecked] = useState(false);
@@ -10,8 +11,13 @@ function Search() {
     const [isFloorTiles, setIsFloorTiles] = useState(false);
     const [isMAGTiles, setIsMAGTiles] = useState(false);
     const [isPACTiles, setIsPACTiles] = useState(false);
-    const currentPage = usePathname();
+    const [istwelvecrosseighteen, settwelvecrosseighteen] = useState(false);
     const router = useRouter();
+    const searchParams = useSearchParams()
+    console.log(searchParams)
+    const currentPage = usePathname();
+    const [value, setValue]= useState("");
+    
 
     const handleCheckboxChange = () => {
       setIsChecked(!isChecked);
@@ -33,6 +39,15 @@ function Search() {
       setIsPACTiles(!isPACTiles);
     };
   
+    const handleCheckboxChangetwelvecrosseighteen = () => {
+      settwelvecrosseighteen(!istwelvecrosseighteen);
+      setValue("12×18");
+      router.push({
+        pathname: currentPage,
+        search: `?value=${value}`,
+      });
+    };
+
   return (
     <div>
       <div className=' mx-5 mb-0 p-2 text-sm w-[400px]'>
@@ -92,10 +107,10 @@ function Search() {
         <input
          className="mx-2"
           type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
+          checked={istwelvecrosseighteen}
+          onChange={handleCheckboxChangetwelvecrosseighteen}
         />
-        12×18
+        12×18 inch
       </label>
         </div>
         <hr/>
@@ -107,7 +122,7 @@ function Search() {
           checked={isChecked}
           onChange={handleCheckboxChange}
         />
-        24×12
+        24×12 inch
       </label>
         </div>
         <hr/>
@@ -119,7 +134,7 @@ function Search() {
           checked={isChecked}
           onChange={handleCheckboxChange}
         />
-        24×24
+        24×24 inch
       </label>
         </div>
         <hr/>
@@ -131,7 +146,7 @@ function Search() {
           checked={isChecked}
           onChange={handleCheckboxChange}
         />
-        24×48
+        24×48 inch
       </label>
         </div>
       </div>

@@ -1,13 +1,22 @@
-"use client"
+'use client';
 import useFetch from '@/app/useFetch';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { RxCrossCircled } from "react-icons/rx";
 import { CiLocationOn } from "react-icons/ci";
 
-const page = () =>{
+export default function page() {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const currentPage = usePathname();
+  const router = useRouter();
+  const sliced = currentPage.slice(21);
+  const value = "";
+  console.log(value)
+  const room = sliced.charAt(0).toUpperCase() + sliced.slice(1);
   const url="Floor Tiles";
-  const {data:photos, loading, error} = useFetch(`http://localhost:8000/tiles/?product=${url}`)
+
+  const {data:photos, loading, error} = useFetch(`http://localhost:8000/tiles/?product=${url}&size=${value}&room=${room}`);
   if(loading) return <h1>LOADING...</h1>;
   if(error) console.log(error);
 
@@ -18,9 +27,12 @@ const page = () =>{
   const handleCloseClick = () => {
     setSelectedPhoto(null);
   };
+
   return (
-  <> 
-      <div className="p-6 md:ml-0 m-2 h-auto grid grid-cols-1 ml-16 gap-6 lg:grid lg:grid-cols-3 lg:gap-8 md:grid md:grid-cols-1 md:gap-8 overflow-hidden">
+    <> 
+    <p>home--products--floortiles--{room}</p>
+    
+    <div className="p-6 md:ml-0 m-2 h-auto grid grid-cols-1 ml-16 gap-6 lg:grid lg:grid-cols-3 lg:gap-8 md:grid md:grid-cols-1 md:gap-8 overflow-hidden">
       {photos.map((photo, index) => (
         <div
           className="border-2 border-gray-100 hover:shadow-lg hover:shadow-gray-400/50 hover:ring-2 hover:ring-gray-200 h-[250px] w-[250px] hover:scale-105 transition-transform duration-300"
@@ -31,12 +43,11 @@ const page = () =>{
             <img src={photo} alt="wall" className='h-[200px]' />
           </div>
           <div className='bg-gray-500 h-[50px] text-center'>
-            <p className='pt-3'>Floor TILES</p>
+            <p className='pt-3'>WALL TILES</p>
           </div>
         </div>
       ))}
-      
-      {selectedPhoto && (
+          {selectedPhoto && (
             <div className='fixed top-[15%] md:left-[25%] left-0 p-10 pt-16 flex-col justify-center h-[500px] bg-gray-600 w-full md:w-1/2 lg:1/2 z-50'>
             <button
               className='absolute top-6 right-9 text-white text-1xl outline-none focus:outline-none'
@@ -57,10 +68,11 @@ const page = () =>{
        </div>
       </div>
       )}
-    </div>
-    
-  </>
-  );
-};
+         </div>
+      
+    </>
+    );
+}
 
-export default page;
+
+
