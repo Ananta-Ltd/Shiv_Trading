@@ -6,10 +6,7 @@ from routers import routers,router_post,router_get
 import psycopg2
 import codecs
 from core.config import settings
-<<<<<<< HEAD
-=======
 from db.dbconnect import create_database
->>>>>>> b52bef0efb85df030c3a68a0c6d9297baee0a3c0
 
 app = FastAPI()
 
