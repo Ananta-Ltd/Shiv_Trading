@@ -154,3 +154,37 @@ class GranitePhotos(BaseModel):
     gp_id:int
     photo_address:str
     gt_id:int
+
+
+class TrendingProduct(BaseModel):
+
+    tp_id:int
+    photo_address:str
+
+    class config:
+        orm_mode:True
+
+
+class BasicFinish(BaseModel):
+
+    bf_id :int
+    photo_address:str
+
+    class config:
+        orm_mode:True
+
+
+class StandardFinish(BaseModel):
+
+    sf_id:int
+    photo_address:str
+
+    class config:
+        orm_mode:True
+class PremiumFinish(BaseModel):
+
+    pf_id:int
+    photo_address:str
+
+    class config:
+        orm_mode:True
