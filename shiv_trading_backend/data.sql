@@ -19,7 +19,7 @@ VALUES
 INSERT INTO rooms(room_id,room_name)
 VALUES
     (1,'Bedroom'),
-    (2,'Living room'),
+    (2,'Livingroom'),
     (3,'Outdoor'),
     (4,'Kitchen'),
     (5,'Bathroom'),
@@ -87,3 +87,31 @@ VALUES
     (3,3,3),
     (4,3,4),
     (5,3,5);
+
+INSERT INTO granites(granite_id,category)
+VALUES
+    (1,'Rajasthani'),
+    (2,'South Indian'),
+    (3,'North Indian');
+
+INSERT INTO thick(thick_id,thick)
+VALUES
+    (1,'11mm'),
+    (2,'13mm'),
+    (3,'15mm'),
+    (4,'18mm');
+
+INSERT INTO granitethick(gt_id,granite_id,thick_id,p_id)
+VALUES
+    (1,1,1,4),
+    (2,1,2,4),
+    (3,1,3,4),
+    (4,1,4,4),
+    (5,2,1,4),
+    (6,2,2,4),
+    (7,2,3,4),
+    (8,2,4,4),
+    (9,3,1,4),
+    (10,3,2,4),
+    (11,3,3,4),
+    (12,3,4,4)

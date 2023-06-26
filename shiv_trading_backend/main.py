@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
-from routers import routers
+from routers import routers,router_post,router_get
 import psycopg2
 import codecs
+from core.config import settings
+from db.dbconnect import create_database
 
 app = FastAPI()
 
@@ -14,12 +16,13 @@ def welcome():
 
 @app.on_event("startup")
 async def startup_event():
+    create_database()
     conn = psycopg2.connect(
-        dbname = "shivtrading",
-        user = "postgres",
-        password = "s8r2j123",
-        host = "localhost",
-        port = "5432"
+        dbname = settings.DATABASE_NAME,
+        user = settings.DATABASE_USER,
+        password = settings.DATABASE_PASSWORD,
+        host = settings.DATABASE_HOST,
+        port = settings.DATABASE_PORT
     )
 
     # Set isolation level to autocommit to execute commands immediately
@@ -41,3 +44,5 @@ async def startup_event():
 
 
 app.include_router(routers.router)
+app.include_router(router_post.router)
+app.include_router(router_get.router)

@@ -88,7 +88,6 @@ class Granite(base):
 
     granite_id=Column(Integer,autoincrement = True,primary_key = True)
     category=Column(String,nullable = False)
-    p_id=Column(Integer,ForeignKey("product"))
 
 class Thick(base):
     __tablename__="thick"
@@ -102,6 +101,7 @@ class GraniteThick(base):
     gt_id=Column(Integer,autoincrement = True,primary_key = True)
     granite_id=Column(Integer,ForeignKey("granites"))
     thick_id=Column(Integer,ForeignKey("thick"))
+    p_id=Column(Integer,ForeignKey("product"))
 
 
 class GranitePhotos(base):
@@ -110,3 +110,29 @@ class GranitePhotos(base):
     gp_id=Column(Integer,autoincrement = True,primary_key = True)
     photo_address=Column(String,nullable = False)
     gt_id=Column(Integer,ForeignKey("granitethick"))
+
+
+class TrendingProduct(base):
+    __tablename__="trendingproduct"
+
+    tp_id=Column(Integer,autoincrement = True,primary_key = True)
+    photo_address=Column(String,nullable = False)
+
+
+class BasicFinish(base):
+    __tablename__="basicfinish"
+
+    bf_id=Column(Integer,autoincrement = True,primary_key = True)
+    photo_address=Column(String,nullable = False)
+
+class StandardFinish(base):
+    __tablename__="standardfinish"
+
+    sf_id=Column(Integer,autoincrement = True,primary_key = True)
+    photo_address=Column(String,nullable = False)
+
+class PremiumFinish(base):
+    __tablename__="premiumfinish"
+
+    pf_id=Column(Integer,autoincrement = True,primary_key = True)
+    photo_address=Column(String,nullable = False)
