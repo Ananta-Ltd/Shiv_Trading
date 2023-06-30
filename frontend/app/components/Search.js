@@ -1,27 +1,15 @@
 "use client"
 import React from 'react'
 import { useState } from 'react';
-import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation'
 
 function Search() {
-    const [isChecked, setIsChecked] = useState(false);
     const [isWallTiles, setIsWallTiles] = useState(false);
     const [isFloorTiles, setIsFloorTiles] = useState(false);
     const [isMAGTiles, setIsMAGTiles] = useState(false);
     const [isPACTiles, setIsPACTiles] = useState(false);
-    const [istwelvecrosseighteen, settwelvecrosseighteen] = useState(false);
     const router = useRouter();
-    const searchParams = useSearchParams()
-    console.log(searchParams)
-    const currentPage = usePathname();
-    const [value, setValue]= useState("");
-    
-
-    const handleCheckboxChange = () => {
-      setIsChecked(!isChecked);
-    };
+  
     const handleCheckboxChangewalltiles = () => {
       router.push('/products/walltiles');
       setIsWallTiles(!isWallTiles);
@@ -39,14 +27,6 @@ function Search() {
       setIsPACTiles(!isPACTiles);
     };
   
-    const handleCheckboxChangetwelvecrosseighteen = () => {
-      settwelvecrosseighteen(!istwelvecrosseighteen);
-      setValue("12×18");
-      router.push({
-        pathname: currentPage,
-        search: `?value=${value}`,
-      });
-    };
 
   return (
     <div>
@@ -97,56 +77,6 @@ function Search() {
           onChange={handleCheckboxChangemagtiles}
         />
         Granite and Marbles
-      </label>
-        </div>
-      </div>
-      <div className=' m-5 mt-1 p-2 text-sm w-[400px]'>
-        <h2 className='bg-gray-400 p-1 shadow-sm'>Search By Size</h2>
-        <div className=' my-1'>
-        <label>
-        <input
-         className="mx-2"
-          type="checkbox"
-          checked={istwelvecrosseighteen}
-          onChange={handleCheckboxChangetwelvecrosseighteen}
-        />
-        12×18 inch
-      </label>
-        </div>
-        <hr/>
-        <div className=' my-1'>
-        <label>
-        <input
-         className="mx-2"
-          type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        />
-        24×12 inch
-      </label>
-        </div>
-        <hr/>
-        <div className=' my-1'>
-        <label>
-        <input
-         className="mx-2"
-          type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        />
-        24×24 inch
-      </label>
-        </div>
-        <hr/>
-        <div className=' my-1'>
-        <label>
-        <input
-         className="mx-2"
-          type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        />
-        24×48 inch
       </label>
         </div>
       </div>

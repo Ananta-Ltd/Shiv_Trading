@@ -1,5 +1,4 @@
 "use client"
-import Search from '@/app/components/Search';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 
@@ -37,7 +36,6 @@ export default function RootLayout({children}){
         </Link>
     </nav>
     <div className='block md:flex lg:flex'>
-       <div className='pt-6'> <Search/></div>
        <div>{children}</div>
     </div>
  
