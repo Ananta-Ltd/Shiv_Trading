@@ -2,29 +2,24 @@
 import React from 'react'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import {usePathname} from 'next/navigation';
 
 function Search() {
-    const [isWallTiles, setIsWallTiles] = useState(false);
-    const [isFloorTiles, setIsFloorTiles] = useState(false);
-    const [isMAGTiles, setIsMAGTiles] = useState(false);
-    const [isPACTiles, setIsPACTiles] = useState(false);
+
+    const currentPage = usePathname();
     const router = useRouter();
-  
+
     const handleCheckboxChangewalltiles = () => {
       router.push('/products/walltiles');
-      setIsWallTiles(!isWallTiles);
     };
     const handleCheckboxChangefloortiles = () => {
       router.push('/products/floortiles');
-      setIsFloorTiles(!isFloorTiles);
     };
     const handleCheckboxChangemagtiles = () => {
       router.push('/products/granitesandmarbles');
-      setIsMAGTiles(!isMAGTiles);
     };
     const handleCheckboxChangepactiles = () => {
       router.push('/products/sanitaryandcp_fittings');
-      setIsPACTiles(!isPACTiles);
     };
   
 
@@ -37,7 +32,7 @@ function Search() {
         <input
          className="mx-2"
           type="checkbox"
-          checked={isWallTiles}
+          checked={currentPage === "/products/walltiles" || currentPage === "/products/walltiles/bathroom" || currentPage === "/products/walltiles/kitchen" || currentPage === "/products/walltiles/livingroom" || currentPage === "/products/walltiles/outdoor" || currentPage === "/products/walltiles/bedroom"}
           onChange={handleCheckboxChangewalltiles}
         />
         Wall Tiles
@@ -49,7 +44,7 @@ function Search() {
         <input
          className="mx-2"
           type="checkbox"
-          checked={isFloorTiles}
+          checked={currentPage === "/products/floortiles" || currentPage === "/products/floortiles/bathroom" || currentPage === "/products/floortiles/kitchen" || currentPage === "/products/floortiles/livingroom" || currentPage === "/products/floortiles/outdoor" || currentPage === "/products/floortiles/bedroom"}
           onChange={handleCheckboxChangefloortiles}
         />
         Floor Tiles
@@ -61,7 +56,7 @@ function Search() {
         <input
          className="mx-2"
           type="checkbox"
-          checked={isPACTiles}
+          checked={(currentPage==="/products/sanitaryandcp_fittings" )? true:false}
           onChange={handleCheckboxChangepactiles}
         />
         Sanitary and C.P. Fittings
@@ -73,7 +68,7 @@ function Search() {
         <input
          className="mx-2"
           type="checkbox"
-          checked={isMAGTiles}
+          checked={(currentPage==="/products/granitesandmarbles" )? true:false}
           onChange={handleCheckboxChangemagtiles}
         />
         Granite and Marbles

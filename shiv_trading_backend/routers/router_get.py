@@ -138,27 +138,32 @@ async def get_tiles(product:Optional[str]=None,size:Optional[str]=None,room:Opti
             return details
     except Exception as e:
         return str(e)
+    finally:
+        db.close()
 
 
 @router.get("/cpfittings/photos/")
 async def get_cpfitting_photos(prod_name:str,fitting_name:Optional[str]=None,db:Session=Depends(dbconnect.get_database)):
-    if prod_name!=None and not prod_name.isspace():
-            query=db.query(model.product).filter(model.product.product_name==prod_name).first()
-            if not query:
-                raise HTTPException(status_code = status.HTTP_501_NOT_IMPLEMENTED,detail = "No such product available")
-            query=db.query(model.cpfittings).filter(model.cpfittings.fitting_name==fitting_name).first()
-            if not query:
-                raise HTTPException(status_code = status.HTTP_501_NOT_IMPLEMENTED,detail = "No such category of cp fittings and sanitary available")
-            if not fitting_name:
-                photo = db.query(model.CPPhotos).join(model.product).filter(
-                    model.product.product_name == prod_name).all()
-                photos = [row.rem_photo_address for row in photo]
+    try:
+        if prod_name!=None and not prod_name.isspace():
+                query=db.query(model.product).filter(model.product.product_name==prod_name).first()
+                if not query:
+                    raise HTTPException(status_code = status.HTTP_501_NOT_IMPLEMENTED,detail = "No such product available")
+                query=db.query(model.cpfittings).filter(model.cpfittings.fitting_name==fitting_name).first()
+                if not query:
+                    raise HTTPException(status_code = status.HTTP_501_NOT_IMPLEMENTED,detail = "No such category of cp fittings and sanitary available")
+                if not fitting_name:
+                    photo = db.query(model.CPPhotos).join(model.product).filter(
+                        model.product.product_name == prod_name).all()
+                    photos = [row.rem_photo_address for row in photo]
+                    return photos
+                photo=db.query(model.CPPhotos).join(model.cpfittings).join(model.product).filter(model.cpfittings.fitting_name==fitting_name).filter(model.product.product_name==prod_name).all()
+                photos=[row.rem_photo_address for row in photo]
                 return photos
-            photo=db.query(model.CPPhotos).join(model.cpfittings).join(model.product).filter(model.cpfittings.fitting_name==fitting_name).filter(model.product.product_name==prod_name).all()
-            photos=[row.rem_photo_address for row in photo]
-            return photos
-    else:
-        raise HTTPException(status_code = status.HTTP_400_BAD_REQUEST, detail = "Product name should be valid")
+        else:
+            raise HTTPException(status_code = status.HTTP_400_BAD_REQUEST, detail = "Product name should be valid")
+    finally:
+        db.close()
 
 
 @router.get("/granite/photos/")
@@ -303,32 +308,40 @@ async def get_granite_photos(product:Optional[str]=None,granite:Optional[str]=No
             return details
     except Exception as e:
         return str(e)
+    finally:
+        db.close()
 
 
 @router.get("/trending/photos/")
 async def get_trending_photos(db:Session=Depends(dbconnect.get_database)):
-    photos=db.query(model.TrendingProduct).all()
-    if not photos:
-        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail = "No trending products available")
-    return photos
+    try:
+        photos=db.query(model.TrendingProduct).all()
+        if not photos:
+            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail = "No trending products available")
+        return photos
+    finally:
+        db.close()
 
 
 @router.get("/finish/photos/",dependencies = [Depends(deps.get_current_user)])
 async def get_finish_photos(db:Session=Depends(dbconnect.get_database),user:model.user=Depends(deps.get_current_user)):
-    user = db.query(model.user).filter(
-        model.user.phone_number == user.phone_number
-    ).first()
-    if not user:
-        raise HTTPException(status_code = status.HTTP_403_FORBIDDEN, detail = "Unauthorized access")
-    plan=str(user.plan)
-    if plan.lower() == "basic":
-        photos = [photo[0] for photo in db.query(model.BasicFinish.photo_address).all()]
-        return photos
+    try:
+        user = db.query(model.user).filter(
+            model.user.phone_number == user.phone_number
+        ).first()
+        if not user:
+            raise HTTPException(status_code = status.HTTP_403_FORBIDDEN, detail = "Unauthorized access")
+        plan=str(user.plan)
+        if plan.lower() == "basic":
+            photos = [photo[0] for photo in db.query(model.BasicFinish.photo_address).all()]
+            return photos
 
-    if plan.lower() == "standard":
-        photos = [photo[0] for photo in db.query(model.StandardFinish.photo_address).all()]
-        return photos
+        if plan.lower() == "standard":
+            photos = [photo[0] for photo in db.query(model.StandardFinish.photo_address).all()]
+            return photos
 
-    if plan.lower() == "premium":
-        photos = [photo[0] for photo in db.query(model.PremiumFinish.photo_address).all()]
-        return photos
+        if plan.lower() == "premium":
+            photos = [photo[0] for photo in db.query(model.PremiumFinish.photo_address).all()]
+            return photos
+    finally:
+        db.close()

@@ -3,22 +3,22 @@ import Image from "next/image";
 function Trending() {
   const [image, setimage] = useState([]);
 
-  useEffect(() => {
-    const fetchPhotos = async () => {
-      try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/photos"
-        );
-        const data = await response.json();
-        setimage(data);
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching photos:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchPhotos = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         "https://jsonplaceholder.typicode.com/photos"
+  //       );
+  //       const data = await response.json();
+  //       setimage(data);
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.error("Error fetching photos:", error);
+  //     }
+  //   };
 
-    fetchPhotos();
-  }, []);
+  //   fetchPhotos();
+  // }, []);
 
   return (
     <>

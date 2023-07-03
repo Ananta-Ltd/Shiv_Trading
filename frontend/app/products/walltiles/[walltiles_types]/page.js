@@ -1,9 +1,9 @@
 'use client';
-import useFetch from '@/app/useFetch';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { RxCrossCircled } from "react-icons/rx";
 import { CiLocationOn } from "react-icons/ci";
+import Link from 'next/link';
 import Search from '@/app/components/Search';
 
 export default function page() {
@@ -11,7 +11,11 @@ export default function page() {
   const [istwelvecrosseighteen, settwelvecrosseighteen] = useState(false);
   const [istwentyfourcrosstwelve, setistwentyfourcrosstwelve] = useState(false);
   const [istwentyfourcrosstwentyfour, setistwentyfourcrosstwentyfour] = useState(false);
-  const [istwelvefourcrossfourtyeight, setistwelvefourcrossfourtyeight] = useState(false);
+  const [istwelvefourcrossfourtyeight, setistwelvefourcrossfourtyeight] = useState(false);  
+  const [data, setData] = useState([]);
+  const [photos, setPhotos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [value, setValue]= useState("");
   const currentPage = usePathname();
   const sliced = currentPage.slice(20);
@@ -19,10 +23,32 @@ export default function page() {
   const room = sliced.charAt(0).toUpperCase() + sliced.slice(1);
   const url="Wall Tiles";
 
-  const {data:photos, loading, error} = useFetch(`http://localhost:8000/tiles/photos/?product=${url}&size=${value}&room=${room}`);
-  if(loading) return <h1>LOADING...</h1>;
-  if(error) console.log(error);
-  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/tiles/photos/?product=${url}&size=${value}&room=${room}`);
+        const data = await response.json();
+        setData(data);
+        setPhotos(data);
+        console.log(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []); 
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   const handlePhotoClick = (photo) => {
     setSelectedPhoto(photo);
@@ -33,23 +59,44 @@ export default function page() {
   };
 
   const handletwelvecrosseighteen = () => {
-    settwelvecrosseighteen(!istwelvecrosseighteen);
-    setValue("12×18inch");  
+    settwelvecrosseighteen(!istwelvecrosseighteen); 
+    setValue('12×18inch');
+    const desiredSize = '12×18inch';
+    const filteredData = photos.filter(item => item.size === desiredSize);
+    console.log(filteredData);
+    setData(filteredData);
+
   };
 
   const handletwentyfourcrosstwelve = () => {
     setistwentyfourcrosstwelve(!istwentyfourcrosstwelve);
-    setValue("24×12inch");  
+    setValue('24×12inch');
+    const desiredSize = '24×12inch';
+    const filteredData = photos.filter(item => item.size === desiredSize);
+    console.log(filteredData);
+    setData(filteredData);
+ 
   };
 
   const handletwentyfourcrosstwentyfour = () => {
-    setistwentyfourcrosstwentyfour(!istwentyfourcrosstwentyfour);
-    setValue("24×24inch");  
+    setistwentyfourcrosstwentyfour(!istwentyfourcrosstwentyfour); 
+    setValue( '24×24inch'); 
+    const desiredSize = '24×24inch';
+    const filteredData = photos.filter(item => item.size === desiredSize);
+    console.log(filteredData);
+    setData(filteredData);
+
   };
  
   const handletwelvefourcrossfourtyeight = () => {
     setistwelvefourcrossfourtyeight(!istwelvefourcrossfourtyeight);
-    setValue("24×48inch");  
+    setValue('24×24inch');
+    const desiredSizes = ['12×18inch', '24×24inch', '36×36inch', '48×48inch'];
+    const filteredData = photos.filter(item => desiredSizes.includes(item.size));
+    console.log(filteredData);
+    setData(filteredData);
+
+
   };
 
  
@@ -57,7 +104,10 @@ export default function page() {
   return (
     <> 
    <div className=' px-0 md:px-0 lg:px-20'>
-   <div className='pl-8 mt-2'><p className=' tracking-tight text-sm font-[600]'>Home &gt;&gt; Products &gt;&gt; Walltiles &gt;&gt; {room}</p></div>
+   <div className='pl-8 mt-2'><p className=' tracking-tight text-sm font-[600]'>
+    <Link href="/">Home</Link> &gt;&gt;  
+    <Link href="/products"> Products</Link> &gt;&gt;  
+    <Link href="./products/walltiles"> Walltiles</Link> &gt;&gt; {room}</p></div>
     
     <div className=' block md:flex '>
      <div> 
@@ -117,7 +167,7 @@ export default function page() {
      </div>
      <div className=''>
      <div className="p-4 md:ml-0 m-2 h-auto grid grid-cols-1 ml-16 gap-6 lg:grid lg:grid-cols-3 lg:gap-8  md:pl-12 pl-12 lg:pl-4 md:grid md:grid-cols-1  md:gap-8 overflow-hidden">
-       {photos.map((photo, index) => (
+       {data.map((photo, index) => (
          <div
            className="border-2 border-gray-100 hover:shadow-lg hover:shadow-gray-400/50 hover:ring-2 hover:ring-gray-200 h-[250px] w-[250px] hover:scale-105 transition-transform duration-300"
            onClick={() => handlePhotoClick(photo.url)}

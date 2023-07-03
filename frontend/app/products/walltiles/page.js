@@ -3,6 +3,7 @@ import useFetch from '@/app/useFetch';
 import { useState } from 'react';
 import { RxCrossCircled } from "react-icons/rx";
 import { CiLocationOn } from "react-icons/ci";
+import Link from 'next/link';
 import Search from '@/app/components/Search';
 
 const page = () =>{
@@ -51,7 +52,10 @@ const page = () =>{
   return (
   <> 
     <div className=' px-0 md:px-0 lg:px-20'>
-   <div className='pl-8 mt-2'><p className=' tracking-tight text-sm font-[600]'>Home &gt;&gt; Products &gt;&gt; Walltiles </p></div>
+   <div className='pl-8 mt-2'><p className=' tracking-tight text-sm font-[600]'>
+    <Link href="/">Home</Link> &gt;&gt;  
+    <Link href="/products"> Products</Link> &gt;&gt;  
+    <Link href="./products/walltiles"> Walltiles</Link> </p></div>
     
     <div className=' block md:flex '>
      <div> 

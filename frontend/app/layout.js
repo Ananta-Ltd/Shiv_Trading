@@ -12,13 +12,13 @@ const roboto = Roboto({
 export const metadata = {
   title: 'Shiv trading | Nepal',
   description: 'Best tiles and marbles',
+  icons: "icon.png",
 }
 
 export default function RootLayout({ children }) {
   return (
     <Provider>
     <html lang="en">
-      
       <body className={roboto.className}>
         <Navbar/>
         {children}
