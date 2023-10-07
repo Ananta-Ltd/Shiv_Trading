@@ -122,7 +122,7 @@ const page = () =>{
           key={index}
         >
           <div className='flex items-center justify-center'>
-            <img src={photo.url} alt="wall" className='h-[200px]' />
+            <img src={photo.url} alt="wall" className='h-[200px] ' />
           </div>
           <div className='bg-gray-500 h-[50px] text-center'>
             <p className='pt-3'>{photo.size}</p>

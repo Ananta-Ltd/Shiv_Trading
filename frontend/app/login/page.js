@@ -13,9 +13,8 @@ const LoginPage = () => {
  
   const handleSubmit = async(e) => {
     e.preventDefault();
-     const newUsername=username.slice(9);
      const result = await signIn("credentials",{
-          username:newUsername,
+          username:username,
           password:password,
           redirect:false,
           callbackUrl:`${window.location.origin}/admin` , 
@@ -41,10 +40,9 @@ const LoginPage = () => {
             <input
               type="text"
               required
-              placeholder='jupi.ter/Username'
+              placeholder='Username'
               className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider focus:outline-none focus:border-gray-500"
               value={username}
-               onClick={(e) => setUsername('jupi.ter/')}
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
@@ -68,7 +66,6 @@ const LoginPage = () => {
           </button>
         </form>
       </div>
-      <p className='m-4 tracking-wider'>Don't have an account? <Link className=' text-blue-500 hover:text-blue-700 underline' href="/signup ">Sign up</Link></p>
     </div>
     </AuthLayout>
    </>

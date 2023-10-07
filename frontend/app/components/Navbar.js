@@ -92,7 +92,7 @@ function AdminNavbar() {
                 <div className='flex'
                  onClick={() => setmobileDropDown(!mobiledropDown)}>
                 <div className='mr-1'>
-                  <Link href="" className={styles.link}> 
+                  <Link href="/" className={styles.link}> 
                   PRODUCTS
                   </Link>
                 </div>
@@ -113,21 +113,13 @@ function AdminNavbar() {
                 <li className="pl-4" >
                   <Link href="/about" className={styles.link}>
                     ABOUT
+                  </Link>   
+                </li>
+                <button className="pl-4 bg-blue-900 hover:bg-blue-950 text-white px-5 py-2">
+                  <Link href="/explore">
+                    Explore More
                   </Link>
-                  
-                </li>
-                <li className="pl-4">
-                  <Link href="/login" className={styles.link}>
-                    LOGIN
-                  </Link>
-                  
-                </li>
-                <li className="pl-4">
-                  <Link href="/signup" className={styles.link}>
-                    SIGNUP
-                  </Link> 
-                </li>
-               
+              </button>
               </ul>
             </div>
           </div>

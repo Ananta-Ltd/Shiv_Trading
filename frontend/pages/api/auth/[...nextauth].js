@@ -12,7 +12,7 @@ export const authOptions = {
         async authorize(credentials, req) {
           const {username, password } = credentials;
           try{
-            const user =  await axios.post('http://127.0.0.1:8000/login',{
+            const user =  await axios.post('http://127.0.0.1:8000/login/',{
               username:username,
               password:password
             },

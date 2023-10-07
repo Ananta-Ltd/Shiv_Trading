@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from typing import List
 import io
 from fastapi import File, HTTPException, Depends, UploadFile
 from sqlalchemy.orm import Session
@@ -14,64 +15,70 @@ async def validate_photo(filename=File(...)):
     allowed_extensions = ['.jpg', '.jpeg', '.png']
     if not any(filename.filename.lower().endswith(ext) for ext in allowed_extensions):
         raise HTTPException(status_code = 400, detail = "Only JPG files are allowed.")
-    max_image_size=15*1024*1024
+    max_image_size=26214400
     if (len(await filename.read())>max_image_size):
             raise HTTPException(status_code = status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, detail = "Image should be less than 15MB")
 
 
 @router.post("/upload/tiles/photos/",dependencies = [Depends(deps.get_current_user)])
-async def upload_tiles_photos(product:str,size:str,room:str,up_photo:UploadFile=File(...),user:model.user=Depends(deps.get_current_user),db:Session=Depends(dbconnect.get_database)):
+async def upload_tiles_photos(product:str,size:str,room:str,up_photos:List[UploadFile]=File(...),user:model.user=Depends(deps.get_current_user),db:Session=Depends(dbconnect.get_database)):
     try:
         user = db.query(model.user).filter(
             model.user.phone_number == user.phone_number,
             model.user.is_superuser == True
         ).first()
         if not user or not user.is_superuser:
-            raise HTTPException(status_code = status.HTTP_403_FORBIDDEN, detail = "Unauthorized attempt to make changes")
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Unauthorized attempt to make changes")
 
         query = db.query(model.product).filter(model.product.product_name == product).first()
         if not query:
-            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = "No such product found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No such product found")
 
         query = db.query(model.size).filter(model.size.sizes == size).first()
         if not query:
-            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = "No such size available")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No such size available")
 
         query = db.query(model.rooms).filter(model.rooms.room_name == room).first()
         if not query:
-            raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = "No such room found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No such room found")
 
         tile_type = db.query(model.product_room_size).join(model.product).join(model.size).join(model.rooms).filter(
             model.product.product_name == product,
             model.rooms.room_name == room,
             model.size.sizes == size
         ).first()
+        print(tile_type)
+        for up_photo in up_photos:
+            await validate_photo(up_photo)
+            image_data = await up_photo.read()
 
-        validate_photo(up_photo)
-        image_data = await up_photo.read()
+            # Upload the image to ImageKit
+            upload_response = imagekit.upload_file(
+                file=io.BytesIO(image_data),
+                file_name=tile_type.prs_id,
+                options={"folder": "/tiles/"}
+            )
+            print(upload_response)
+            print("\n")
+            if upload_response is not None and "response" in upload_response:
+                # Get the URL of the uploaded image
+                image_url = upload_response.get("response")
+                image_url=image_url.get("url")
+                photo_address = image_url
+                upload_photo = model.tiles_photos(photo_address=photo_address, prs_id=tile_type.prs_id)
+                db.add(upload_photo)
+                db.commit()
+                db.refresh(upload_photo)
+            else:
+                raise Exception("Error occurred during image upload")
 
-        # Upload the image to ImageKit
-        upload_response = imagekit.upload_file(
-            file = io.BytesIO(image_data),
-            file_name = tile_type.prs_id,
-            options = { "folder": "/tiles/" }
-        )
-        # Get the URL of the uploaded image
-        image_url = upload_response.get("response")
-        image_url = image_url.get("url")
-        photo_address = image_url
-        upload_photo = model.tiles_photos(photo_address = photo_address, prs_id = tile_type.prs_id)
-        db.add(upload_photo)
-        db.commit()
-        db.refresh(upload_photo)
-
-        return { "message": "Photo uploaded successfully" }
+        return {"message": "Photo uploaded successfully"}
     finally:
-            db.close()
+        db.close()
 
 
 @router.post("/upload/cpfittings/photos/",dependencies = [Depends(deps.get_current_user)])
-async def upload_cpfittings_photos(product:str,fitting_name:str,up_photo:UploadFile=File(...),user:model.user=Depends(deps.get_current_user),db:Session=Depends(dbconnect.get_database)):
+async def upload_cpfittings_photos(product:str,fitting_name:str,up_photos:List[UploadFile]=File(...),user:model.user=Depends(deps.get_current_user),db:Session=Depends(dbconnect.get_database)):
     try:
         user = db.query(model.user).filter(
             model.user.phone_number == user.phone_number,
@@ -90,26 +97,28 @@ async def upload_cpfittings_photos(product:str,fitting_name:str,up_photo:UploadF
 
         tile_type = db.query(model.product_fitting).join(model.product).join(model.cpfittings).filter(
             model.product.product_name == product,
-            model.size.sizes == fitting_name
+            model.cpfittings.fitting_name == fitting_name
         ).first()
+        for up_photo in up_photos:
+            validate_photo(up_photo)
+            image_data = await up_photo.read()
 
-        validate_photo(up_photo)
-        image_data = await up_photo.read()
-
-        # Upload the image to ImageKit
-        upload_response = imagekit.upload_file(
-            file = io.BytesIO(image_data),
-            file_name = tile_type.p_fitting_id,
-            options = { "folder": "/cpphotos/" }
-        )
-        # Get the URL of the uploaded image
-        image_url = upload_response.get("response")
-        image_url = image_url.get("url")
-        photo_address = image_url
-        upload_photo = model.CPPhotos(photo_address = photo_address, p_fitting_id = tile_type.p_fitting_id)
-        db.add(upload_photo)
-        db.commit()
-        db.refresh(upload_photo)
+            # Upload the image to ImageKit
+            upload_response = imagekit.upload_file(
+                file = io.BytesIO(image_data),
+                file_name = tile_type.p_fitting_id,
+                options = { "folder": "/cpphotos/" }
+            )
+            # Get the URL of the uploaded image
+            print(upload_response)
+            print("\n")
+            image_url = upload_response.get("response")
+            image_url = image_url.get("url")
+            photo_address = image_url
+            upload_photo = model.CPPhotos(photo_address = photo_address, p_fitting_id = tile_type.p_fitting_id)
+            db.add(upload_photo)
+            db.commit()
+            db.refresh(upload_photo)
 
         return { "message": "Photo uploaded successfully" }
     finally:
