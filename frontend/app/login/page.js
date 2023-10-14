@@ -51,7 +51,7 @@ const LoginPage = () => {
               type="password"
               placeholder='password'
               required
-              minlength="8"
+              // minlength="8"
               className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider  focus:outline-none focus:border-gray-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

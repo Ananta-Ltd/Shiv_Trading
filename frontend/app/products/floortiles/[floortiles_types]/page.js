@@ -30,8 +30,6 @@ export default function page() {
 
   return (
     <> 
-    <p>home--products--floortiles--{room}</p>
-    
     <div className="p-6 md:ml-0 m-2 h-auto grid grid-cols-1 ml-16 gap-6 lg:grid lg:grid-cols-3 lg:gap-8 md:grid md:grid-cols-1 md:gap-8 overflow-hidden">
       {photos.map((photo, index) => (
         <div

@@ -1,10 +1,9 @@
 "use client"
 import React from 'react'
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {usePathname} from 'next/navigation';
 
-function Search() {
+function Search_by_productname() {
 
     const currentPage = usePathname();
     const router = useRouter();
@@ -15,14 +14,14 @@ function Search() {
     const handleCheckboxChangefloortiles = () => {
       router.push('/products/floortiles');
     };
-    const handleCheckboxChangemagtiles = () => {
+    const handleCheckboxGranite = () => {
       router.push('/products/granitesandmarbles');
     };
-    const handleCheckboxChangepactiles = () => {
+    const handleCheckboxCp_fittings = () => {
       router.push('/products/sanitaryandcp_fittings');
     };
-  
 
+    
   return (
     <div>
       <div className=' mx-5 mb-0 p-2 text-sm w-[400px]'>
@@ -57,7 +56,7 @@ function Search() {
          className="mx-2"
           type="checkbox"
           checked={(currentPage==="/products/sanitaryandcp_fittings" )? true:false}
-          onChange={handleCheckboxChangepactiles}
+          onChange={handleCheckboxCp_fittings}
         />
         Sanitary and C.P. Fittings
       </label>
@@ -69,7 +68,7 @@ function Search() {
          className="mx-2"
           type="checkbox"
           checked={(currentPage==="/products/granitesandmarbles" )? true:false}
-          onChange={handleCheckboxChangemagtiles}
+          onChange={handleCheckboxGranite}
         />
         Granite and Marbles
       </label>
@@ -79,4 +78,4 @@ function Search() {
   )
 }
 
-export default Search
+export default Search_by_productname
