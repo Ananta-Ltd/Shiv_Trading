@@ -8,7 +8,7 @@ const AboutUs = () => {
   return (
    
     <div className="pt-16 md:pt-14 flex flex-col">
-      <div className="px-10 md:px-16 pt-8">
+      <div className=" md:pl-20 px-10 md:px-16 pt-8">
         
       <div style={{  }}>
            

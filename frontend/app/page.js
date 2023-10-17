@@ -7,6 +7,7 @@ import Image from "next/image";
 import tiles1 from "../public/images/tiles1.jpg";
 import tiles2 from "../public/images/tiles2.jpg";
 import tiles3 from "../public/images/tiles4.jpg";
+import Reveal from "./components/utils/Reveal";
 
 const images = [tiles1, tiles2, tiles3];
 
@@ -33,27 +34,29 @@ function Home() {
 
   return (
     <>
+     <Reveal>
       <div className="slider m-2 mt-0 flex justify-center">
-     <div className="relative">
-     <button
-          className="absolute left-0 top-[200px] text-white"
-          onClick={handlePrevious}
-        >
-          <AiOutlineLeftCircle />
-        </button>
-        <Image
-          className="h-[400px] w-[1200px] "
-          src={images[currentImage]}
-          alt="Carousel Image"
-        />   
-        <button
-          className="absolute right-0 top-[200px] text-white"
-          onClick={handleNext}
-        >
-          <AiOutlineRightCircle />
-        </button>
-     </div>
-      </div>
+        <div className="relative">
+          <button
+                className="absolute left-0 top-[200px] text-white"
+                onClick={handlePrevious}
+              >
+                <AiOutlineLeftCircle />
+              </button>
+              <Image
+                className="h-[400px] w-[1200px] "
+                src={images[currentImage]}
+                alt="Carousel Image"
+              />   
+              <button
+                className="absolute right-0 top-[200px] text-white"
+                onClick={handleNext}
+              >
+                <AiOutlineRightCircle />
+            </button>
+          </div>
+        </div>
+     </Reveal>
       <Products />
       <Trending />
       <div className="flex justify-center m-9">
