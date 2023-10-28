@@ -4,6 +4,7 @@ import { Roboto } from 'next/font/google'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Provider from './components/Provider'
+import { Toaster } from 'react-hot-toast'
 
 const roboto = Roboto({ 
   subsets: ['latin'] , 
@@ -23,6 +24,13 @@ export default function RootLayout({ children }) {
       <body className={roboto.className}>
         <Navbar/>
         {children}
+        <Toaster 
+          toastOptions={{
+            style: {
+              marginTop:"62px",
+              },
+            }} 
+          position='top-right'/>
         <Footer/>
       </body>
       

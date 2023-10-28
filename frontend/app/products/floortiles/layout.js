@@ -7,48 +7,6 @@ import {usePathname} from 'next/navigation';
 export default function RootLayout({children}){
     const currentPage = usePathname();
     const isActive = currentPage.slice(21);
-
-    // const handletwelvecrosseighteen = () => {
-    //     settwelvecrosseighteen(!istwelvecrosseighteen); 
-    //     setValue('12×18inch');
-    //     const desiredSize = '12×18inch';
-    //     const filteredData = photos.filter(item => item.size === desiredSize);
-    //     console.log(filteredData);
-    //     setData(filteredData);
-    
-    //   };
-    
-    //   const handletwentyfourcrosstwelve = () => {
-    //     setistwentyfourcrosstwelve(!istwentyfourcrosstwelve);
-    //     setValue('24×12inch');
-    //     const desiredSize = '24×12inch';
-    //     const filteredData = photos.filter(item => item.size === desiredSize);
-    //     console.log(filteredData);
-    //     setData(filteredData);
-     
-    //   };
-    
-    //   const handletwentyfourcrosstwentyfour = () => {
-    //     setistwentyfourcrosstwentyfour(!istwentyfourcrosstwentyfour); 
-    //     setValue( '24×24inch'); 
-    //     const desiredSize = '24×24inch';
-    //     const filteredData = photos.filter(item => item.size === desiredSize);
-    //     console.log(filteredData);
-    //     setData(filteredData);
-    
-    //   };
-     
-    //   const handletwelvefourcrossfourtyeight = () => {
-    //     setistwelvefourcrossfourtyeight(!istwelvefourcrossfourtyeight);
-    //     setValue('24×24inch');
-    //     const desiredSizes = ['12×18inch', '24×24inch', '36×36inch', '48×48inch'];
-    //     const filteredData = photos.filter(item => desiredSizes.includes(item.size));
-    //     console.log(filteredData);
-    //     setData(filteredData);
-    
-    
-    //   };
-    
     
     return(
         <>

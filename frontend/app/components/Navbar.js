@@ -32,13 +32,13 @@ function AdminNavbar() {
   return (
     
     <>
-         <nav className={`w-full  sticky top-0 z-10 bg-white  ${ scrolled ? 'shadow-lg' : ''}`}>
+      <nav className={`w-full  sticky top-0  ${ scrolled ? 'shadow-lg z-10 bg-gray-400 ' : 'bg-transparent'}`}>
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-2 md:py-1 md:block"
             onMouseLeave={() => setDropDown(false)}>
               <Link href="/">
-              <Image className='w-[65px]' src={logo} alt="logo"></Image>
+              <Image className='w-[75px]' src={logo} alt="logo"></Image>
               </Link>
               <div className="md:hidden">
                 <button
@@ -103,19 +103,19 @@ function AdminNavbar() {
                 {navbar&& mobiledropDown && <div className='md:hidden'><Dropdown/></div>}
                 </div>
                 </li>
-                <li className="pl-4"
+                <li className="pr-2"
                  onMouseEnter={() => setDropDown(false)}>
                   <Link href="/where" className={styles.link} >
                     WHERE TO BUY
                   </Link>
                   
                 </li>
-                <li className="pl-4" >
+                <li className="pr-3 " >
                   <Link href="/about" className={styles.link}>
                     ABOUT
                   </Link>   
                 </li>
-                <button className="pl-4 bg-blue-900 hover:bg-blue-950 text-white px-5 py-2">
+                <button className="pl-4 bg-blue-950 hover:bg-white text-white  px-5 py-2 border border-blue-950 hover:text-blue-950">
                   <Link href="/explore">
                     Explore More
                   </Link>

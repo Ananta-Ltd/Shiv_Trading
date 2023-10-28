@@ -12,18 +12,20 @@ export const authOptions = {
         async authorize(credentials, req) {
           const {username, password } = credentials;
           try{
-            const user =  await axios.post('http://127.0.0.1:8000/login/',{
-              username:username,
+            const user =  await axios.post(`${process.env.NEXT_PUBLIC_HOST}/login/`,{
+              phonenumber:username,
               password:password
+              
             },
             {headers:
             {
-               'Content-Type':'application/x-www-form-urlencoded',
-               'Accept':'application/json'
+               'Content-Type':'application/json',
+               'Accept':'*/*'
             }})
-            
+           
           if (user) {
             return user.data;
+            
           } else{ return null;}
           }
        catch (e) {

@@ -14,7 +14,7 @@ const page = () =>{
   const searchParams = useSearchParams();
   const size = searchParams.get("value");
   console.log(size);
-  const url = size ? `http://localhost:8000/tiles/photos/?product=${tiles}&size=${size}` : `http://localhost:8000/tiles/photos/?product=${tiles}`;
+  const url = size ? `${process.env.NEXT_PUBLIC_HOST}/tiles/photos/?product=${tiles}&size=${size}` : `${process.env.NEXT_PUBLIC_HOST}/tiles/photos/?product=${tiles}`;
   
   useEffect(() => {
     const fetchData = async () => {

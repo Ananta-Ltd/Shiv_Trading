@@ -2,12 +2,13 @@
 import React, { useState } from 'react';
 import AuthLayout from '../components/AuthLayout';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 import { signIn} from 'next-auth/react';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(false);
   const router = useRouter();
  
@@ -46,16 +47,20 @@ const LoginPage = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 relative">
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               placeholder='password'
               required
-              // minlength="8"
+              minlength="6"
               className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider  focus:outline-none focus:border-gray-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+             <div className='absolute right-4 top-[10px]'>
+                {!showPassword && <button type='button' onClick={()=>setShowPassword(!showPassword)}><AiFillEyeInvisible/></button>}
+                {showPassword && <button type='button' onClick={()=>setShowPassword(!showPassword)}><AiFillEye/></button> } 
+              </div> 
           </div>
           {error &&<p className='text-red-500 pb-3 '> wrong username or password</p>}
           <button

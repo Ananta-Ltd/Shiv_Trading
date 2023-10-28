@@ -4,22 +4,37 @@ import axios from 'axios';
 import AuthLayout from '@/app/components/AuthLayout';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 
 const SignupPage = () => {
   const [username, setUsername] = useState('');
-  const [name, setName] = useState('');
+  const [plan, setPlan] = useState('');
   const [email, setEmail] = useState('');
+  const [is_superuser, setIs_SuperUser] = useState('');
+  const [country_code, setCountry_code] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
      console.log(username)
-     console.log(name)
+     console.log(plan)
      console.log(email)
      console.log(password)
-     await axios.post(`http://127.0.0.1:8000/users/?user_name=${username}&name=${name}&email=${email}&password=${password}`
+     console.log(country_code)
+     console.log(is_superuser)
+  
+     await axios.post(`${process.env.NEXT_PUBLIC_HOST}register/user/`,
+     {
+      email:email,
+      country_code:country_code,
+      phone_number:username,
+      plan:plan,
+      is_superuser:is_superuser,
+      password:password
+     }
 )
   .then(response => {
     console.log(response.data);
@@ -30,7 +45,7 @@ const SignupPage = () => {
   })
   .catch(error => {
     console.error(error);
-    setError(true);
+    setError(error.message);
   });
   
   }
@@ -42,29 +57,40 @@ const SignupPage = () => {
       <div className="max-w-md w-full py-10 px-6 bg-white shadow-md rounded-md">
         <h2 className="text-2xl font-bold mb-6 ">Sign up</h2>
         <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+            <input
+              type="number"
+              placeholder='Country Code'
+              required
+              className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider focus:outline-none focus:border-gray-500"
+              value={country_code}
+              onChange={(e) => setCountry_code(e.target.value)}
+            />
+          </div>
           <div className="mb-4">
             <input
               type="number"
               placeholder='Number'
               required
-              max={10}
-              min={10}
               className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider focus:outline-none focus:border-gray-500"
               value={username}
-              // onClick={(e) => setUsername('jupi.ter/')}
               onChange={(e) => setUsername(e.target.value)}
             />
-            {error &&<p className='text-red-500 '> username already exist</p>}
+            
           </div>
           <div className="mb-4">
-            <input
-              type="text"
-              placeholder='Name'
+            <select
+            className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider focus:outline-none focus:border-gray-500"
+              id="dropdown"
               required
-              className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider focus:outline-none focus:border-gray-500"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+              value={plan}
+              onChange={(e) => setPlan(e.target.value)}
+            >
+              <option value="">Select a plan</option>
+              <option value="Basic">Basic</option>
+              <option value="Standard">Standard</option>
+              <option value="Premium">Premium</option>
+            </select>
           </div>
           <div className="mb-4">
             <input
@@ -76,28 +102,29 @@ const SignupPage = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 relative">
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               placeholder='password'
               required
-              minlength="8"
+              minlength="6"
               className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider focus:outline-none focus:border-blue-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
-          {/* <div className="mb-4">
-            <input
-              type="password"
-              placeholder='Confirm Password'
-              required
-              minlength="8"
-              className="border-gray-200 border-2 rounded-md px-4 py-2 w-full focus:outline-none focus:border-blue-500"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div> */}
+            <div className='absolute right-4 top-[10px]'>
+            {!showPassword && <button type='button' onClick={()=>setShowPassword(!showPassword)}><AiFillEyeInvisible/></button>}
+            {showPassword && <button type='button' onClick={()=>setShowPassword(!showPassword)}><AiFillEye/></button> } 
+          </div> 
+          </div> 
+          <div className="mb-4 relative px-4 py-2 flex justify-between">
+            <label>Is Superuser?</label>
+            <input type="radio" id="True" name="superuser" value="True"  onChange={(e) => setIs_SuperUser(e.target.value)} />
+            <label for="True">True</label>
+            <input type="radio" id="False" name="superuser" value="False"  onChange={(e) => setIs_SuperUser(e.target.value)}/>
+            <label for="False">False</label>
+          </div>  
+          {error &&<p className='text-red-500 mb-4'>{error}</p>}    
         <button
             type="submit"
             className="bg-black hover:bg-gray-600 text-white font-medium tracking-wider py-2 px-4 rounded-md"

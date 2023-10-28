@@ -14,13 +14,13 @@ export default function page() {
   const [value, setValue]= useState("");
   const currentPage = usePathname();
   const sliced = currentPage.slice(20);
-
+  
   const room = sliced.charAt(0).toUpperCase() + sliced.slice(1);
   const tiles="Wall Tiles";
   const searchParams = useSearchParams();
   const size = searchParams.get("value");
   console.log(size);
-  const url = size ? `http://localhost:8000/tiles/photos/?product=${tiles}&size=${size}&room=${room}` : `http://localhost:8000/tiles/photos/?product=${tiles}&size=${value}&room=${room}`;
+  const url = size ? `${process.env.NEXT_PUBLIC_HOST}/tiles/photos/?product=${tiles}&size=${size}&room=${room}` : `${process.env.NEXT_PUBLIC_HOST}/tiles/photos/?product=${tiles}&size=${value}&room=${room}`;
   
   useEffect(() => {
     const fetchData = async () => {

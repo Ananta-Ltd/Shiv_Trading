@@ -3,22 +3,23 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 function index() {
   const [selectedTilesFiles, setSelectedTilesFiles] = useState([]);
   const [selectedCPFittingsFiles, setSelectedCPFittingsFiles] = useState([]);
   const [selectedGranite_MarbleFiles, setSelectedGranite_MarbleFiles] = useState([]);
-  const [selectedTrandingFiles, setSelectedTrandingFiles] = useState([]);
   const [selectedFinishedFiles, setSelectedFinishedFiles] = useState([]);
   const [product, setProduct] = useState('');
   const [size, setSize] = useState('');
   const [room, setRoom] = useState('');
+  const [tranding, setTranding] = useState('');
   const [fitting_name, setFitting_name] = useState('');
   const [granite, setGranite] = useState('');
   const [graniteSize, setGraniteSize] = useState('');
   const [plan, setPlan] = useState('');
   const {data:session}= useSession();
-  const token = session?.user.access_token;
+  const token = session?.user.token;
 
   const handleTilesFileChange = (event) => {
     const files = event.target.files;
@@ -35,14 +36,9 @@ function index() {
     setSelectedGranite_MarbleFiles(Array.from(files));
   };
 
-  const handleTrandingFileChange = (event) => {
-    const files = event.target.files;
-    setSelectedTrandingFiles(Array.from(files));
-  };
-
   const handleFinishedFileChange = (event) => {
-    const files = event.target.files;
-    setSelectedFinishedFiles(Array.from(files));
+    const files = event.target.files[0];
+    setSelectedFinishedFiles(event.target.files[0]);
   };
 
   const handleProductChange = (event) => {
@@ -73,6 +69,10 @@ function index() {
     setPlan(event.target.value);
   };
 
+  const handleTranding = (event) => {
+    setTranding(event.target.value);
+  }
+
   const handleUploadTiles =async () => {
     if (selectedTilesFiles.length > 0) {
       // Perform the upload logic here
@@ -80,6 +80,7 @@ function index() {
       console.log('Product:', product);
       console.log('Size:', size);
       console.log('Room:', room);
+      console.log('Tranding:', tranding);
 
       const config = {
         headers: {
@@ -88,15 +89,17 @@ function index() {
         }
       };
       const formData = new FormData();
-      formData.append("selectedFile", selectedTilesFiles);
+      formData.append("up_photo", selectedTilesFiles);
     
-      await axios.post(`http://127.0.0.1:8000/upload/tiles/photos/?product=${product}&size=${size}&room=${room}`, formData, config,)
+      await axios.post(`${process.env.NEXT_PUBLIC_HOST}/upload/tiles/photos/?product=${product}&size=${size}&room=${room}&trending=${tranding}`,formData, config,)
         .then(response => {
           console.log(response.data);
           setSelectedTilesFiles([]);
+          toast.success('Product uploaded successfully!');
         })
         .catch(error => {
           console.log(error);
+          toast.error('Error uploading product: ' + error.message);
         });
     } else {
       console.log('No files selected.');
@@ -117,15 +120,17 @@ function index() {
         }
       };
       const formData = new FormData();
-      formData.append("selectedFile", selectedCPFittingsFiles);
+      formData.append("up_photo", selectedCPFittingsFiles);
     
-      await axios.post(`http://127.0.0.1:8000/upload/cpfittings/photos/?product=${product}&fitting_name=${fitting_name}`, formData, config,)
+      await axios.post(`${process.env.NEXT_PUBLIC_HOST}/upload/cpfittings/photos/?product=${product}&fitting_name=${fitting_name}`, formData, config,)
         .then(response => {
           console.log(response.data);
           setSelectedCPFittingsFiles([]);
+          toast.success('Product uploaded successfully!');
         })
         .catch(error => {
           console.log(error);
+          toast.error('Error uploading product: ' + error.message);
         });
     } else {
       console.log('No files selected.');
@@ -146,49 +151,25 @@ function index() {
         }
       };
       const formData = new FormData();
-      formData.append("selectedFile", selectedGranite_MarbleFiles);
+      formData.append("up_photo", selectedGranite_MarbleFiles);
     
-      await axios.post(`http://127.0.0.1:8000/upload/granite&marble/photos/?product=${product}&granite=${granite}&graniteSize=${graniteSize}`, formData, config,)
+      await axios.post(`${process.env.NEXT_PUBLIC_HOST}/upload/granite&marble/photos/?product=${product}&granite=${granite}&graniteSize=${graniteSize}`, formData, config,)
         .then(response => {
           console.log(response.data);
           setSelectedGranite_MarbleFiles([]);
+          toast.success('Product uploaded successfully!');
         })
         .catch(error => {
           console.log(error);
         });
     } else {
       console.log('No files selected.');
-    }
-  };
-
-  const handleTrandingUpload = async() => {
-    if (selectedTrandingFiles.length > 0) {
-      // Perform the upload logic here
-      console.log('Uploading files:', selectedTrandingFiles);
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,
-        }
-      };
-      const formData = new FormData();
-      formData.append("selectedFile", selectedTrandingFiles);
-    
-      await axios.post(`http://127.0.0.1:8000/upload/trending/product/photos/`, formData, config,)
-        .then(response => {
-          console.log(response.data);
-          setSelectedTrandingFiles([]);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    } else {
-      console.log('No files selected.');
+      toast.error('Error uploading product: ' + error.message);
     }
   };
 
   const handleFinishedUpload = async() => {
-    if (selectedFinishedFiles.length > 0) {
+    
       // Perform the upload logic here
       console.log('Uploading files:', selectedFinishedFiles);
       console.log('Plan:', plan);
@@ -200,25 +181,26 @@ function index() {
         }
       };
       const formData = new FormData();
-      const fileBlob = new Blob([selectedFinishedFiles], { type: selectedFinishedFiles.type });
-      formData.append("selectedFile", fileBlob, "image");
+      formData.append("up_photo", selectedFinishedFiles);
     
-      await axios.post(`http://127.0.0.1:8000/upload/finish/photos/?plan=${plan}`, formData, config)
+      await axios.post(`${process.env.NEXT_PUBLIC_HOST}/upload/finish/photos/?plan=${plan}`, formData, config)
         .then(response => {
           console.log(response.data)
           setSelectedFinishedFiles([]);
+          toast.success('Product uploaded successfully!');
         })
         .catch(error => {
           console.log(error);
+          toast.error('Error uploading product: ' + error.message);
         });
-    } else {
-      console.log('No files selected.');
-    }
+   
   };
 
+
   return (
-    <div className=' bg-gray-200 w-full h-screen'>
-      <div className='flex justify-center pt-10'>
+    <div className=' bg-gray-200 w-full min-h-screen'>
+      {/* Upload Tiles */}
+      <div className='flex justify-center pt-20'>
         <label htmlFor="uploadTilesButton" className='flex-col bg-green-200 border-2 border-green-600 w-[80%] rounded-md shadow-md px-4 py-3 font-bold'> Upload tiles photo
           <input
             type="file"
@@ -265,6 +247,15 @@ function index() {
               <option value="Livingroom">Living Room</option>
               <option value="Outdoor">Outdoor</option>
             </select>
+            <select
+              value={tranding}
+              onChange={handleTranding}
+              className="w-full px-4 py-2 mb-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Do you want to keep this photo on tranding section?</option>
+              <option value="True">Yes</option>
+              <option value="False">No</option>
+            </select>
             <button
               onClick={handleUploadTiles}
               className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-950"
@@ -274,6 +265,8 @@ function index() {
           </div>
         )}
       </div>
+
+      {/* Upload sanitary and cpfittings */}
       <div className='flex justify-center pt-5'>
         <label htmlFor="uploadCPFittingsButton" className='flex-col bg-green-200 border-2 border-green-600 w-[80%] rounded-md shadow-md px-4 py-3 font-bold'> Upload Cpfittings Photos
           <input
@@ -302,6 +295,17 @@ function index() {
               <option value="Double Vacuum Commote">Double Vacuum Commote</option>
               <option value="Single Vacuum Commote">Single Vacuum Commote</option>
             </select>
+
+            <select
+              value={tranding}
+              onChange={handleTranding}
+              className="w-full px-4 py-2 mb-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Do you want to keep this photo on tranding section?</option>
+              <option value="True">Yes</option>
+              <option value="False">No</option>
+            </select>
+
             <button
               onClick={handleUploadCPFittings}
               className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-950"
@@ -311,6 +315,8 @@ function index() {
           </div>
         )}
       </div>
+
+      {/* Upload granite and marble */}
       <div className='flex justify-center pt-5'>
         <label htmlFor="uploadGranite_MarbleButton" className='flex-col bg-green-200 border-2 border-green-600 w-[80%] rounded-md shadow-md px-4 py-3 font-bold'> Upload granite and marble photo
           <input
@@ -348,6 +354,16 @@ function index() {
               <option value="15mm">15 mm </option>
               <option value="18mm">18 mm </option>
             </select>
+
+            <select
+              value={tranding}
+              onChange={handleTranding}
+              className="w-full px-4 py-2 mb-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Do you want to keep this photo on tranding section?</option>
+              <option value="True">Yes</option>
+              <option value="False">No</option>
+            </select>
           
             <button
               onClick={handleGranite_MarbleUpload}
@@ -358,42 +374,22 @@ function index() {
           </div>
         )}
       </div>
+   
       <div className='flex justify-center pt-5'>
-        <label htmlFor="uploadTrandingButton" className='flex-col bg-green-200 border-2 border-green-600 w-[80%] rounded-md shadow-md px-4 py-3 font-bold'> Upload tranding photo
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleTrandingFileChange}
-            className="hidden"
-            id="uploadTrandingButton"
-            multiple // Enable multiple file selection
-          />
-        </label>
-      </div>
-      <div className='w-[80%] ml-[10%]'>
-        {selectedTrandingFiles.length > 0 && (
-            <button
-              onClick={handleTrandingUpload}
-              className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-950"
-            >
-              Upload
-            </button>
-        )}
-      </div>
-      <div className='flex justify-center pt-5'>
-        <label htmlFor="uploadFinishButton" className='flex-col bg-green-200 border-2 border-green-600 w-[80%] rounded-md shadow-md px-4 py-3 font-bold'> Upload finish photo
+        <label htmlFor="uploadFinishedButton" className='flex-col bg-green-200 border-2 border-green-600 w-[80%] rounded-md shadow-md px-4 py-3 font-bold'> 
+          Upload Finished Photos
           <input
             type="file"
             accept="image/*"
             onChange={handleFinishedFileChange}
             className="hidden"
-            id="uploadFinishButton"
-            multiple 
+            id="uploadFinishedButton"
+            multiple // Enable multiple file selection
           />
         </label>
       </div>
       <div className='w-[80%] ml-[10%]'>
-        {selectedFinishedFiles.length > 0 && (
+      {(
           <div className="mt-2">
             <select
               value={plan}
@@ -413,9 +409,9 @@ function index() {
               Upload
             </button>
           </div>
-        )}
+      )}
       </div>
-      <div className='flex justify-center pt-5'>
+      <div className='flex justify-center pt-5 pb-20'>
         <label htmlFor="uploadsignuoButton" className='flex-col bg-blue-200 border-2 border-blue-600 w-[80%] rounded-md shadow-md px-4 py-3 font-bold'> 
         <Link href='admin/signup'>Signup for Users</Link>
         </label>
