@@ -47,29 +47,27 @@ function Home() {
       
 
       {/* Achievement */}
-      <div className=" flex flex-col  items-center ">
-        <div className="slider ">
-          <div className="relative h-[500px]">
-            <button
-                  className="absolute left-0 top-[200px] text-white"
-                  onClick={handlePrevious}
-                >
-                  <AiOutlineLeftCircle />
-                </button>
-                <Image
-                  className="w-[90vw] h-full object-cover"
-                  src={images[currentImage]}
-                  alt="Carousel Image"
-                />   
-                <button
-                  className="absolute right-0 top-[200px] text-white"
-                  onClick={handleNext}
-                >
-                  <AiOutlineRightCircle />
+      <div className="slider m-2 mt-0 flex justify-center items-center  ">
+        <div className="relative">
+          <button
+                className="absolute left-0 top-[230px] text-white"
+                onClick={handlePrevious}
+              >
+                <AiOutlineLeftCircle />
               </button>
-            </div>
+              <Image
+                className="h-[475px] w-[1200px] object-cover"
+                src={images[currentImage]}
+                alt="Carousel Image"
+              />   
+              <button
+                className="absolute right-0 top-[230px] text-white"
+                onClick={handleNext}
+              >
+                <AiOutlineRightCircle />
+            </button>
+          </div>
         </div>
-      </div>
       <Products />
       <Trending />
       <Finishes/>

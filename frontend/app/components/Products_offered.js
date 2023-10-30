@@ -63,7 +63,7 @@ function Products() {
     <>
      <div>
       {/* Explore wall tiles */}
-        <div className='flex flex-col lg:flex lg:flex-row justify-center items-center min-h-screen m-10 mr-0 bg-gray-100'>
+        <div className='flex flex-col lg:flex lg:flex-row justify-center items-center min-h-screen md:m-10 bg-gray-100'>
           <div className=' h-[500px] w-[500px] p-8 pt-0 flex flex-col justify-center items-center md:block'>
             <motion.h4 
               initial={{ opacity: 0, x: -200 }}
@@ -88,7 +88,7 @@ function Products() {
               transition={{ duration: 0.5 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-               className='flex h-[220px] w-[450px] bg-gray-600'>
+               className='flex h-[220px] w-[90vw] md:w-[450px] bg-gray-600'>
               <div><img src={(wallTiles[0]?.url)} alt='tiles_image' className='h-[220px] w-[150px]'/></div>
               <div><img src={(wallTiles[1]?.url)} alt='tiles_image' className='h-[220px] w-[150px]'/></div>
               <div><img src={(wallTiles[2]?.url)} alt='tiles_image' className='h-[220px] w-[150px]'/></div>
@@ -228,7 +228,7 @@ function Products() {
                transition={{ duration: 0.5 }}
                whileInView={{ opacity: 1, y: 0 }}
                viewport={{ once: true }}
-              className='flex h-[220px] w-[450px] bg-gray-600'>
+              className='flex h-[220px] md:w-[450px] w-[90vw] bg-gray-600'>
               <div><img src={(floorTiles[0]?.url)} alt='tiles_image' className='h-[220px] w-[150px]'/></div>
               <div><img src={(floorTiles[1]?.url)} alt='tiles_image' className='h-[220px] w-[150px]'/></div>
               <div><img src={(floorTiles[2]?.url)} alt='tiles_image' className='h-[220px] w-[150px]'/></div>

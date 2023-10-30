@@ -34,7 +34,7 @@ function Trending() {
   
   return (
     <>
-    <div className="relative  h-screen m-10 bg-gray-100 p-8">
+    <div className="relative  h-screen m-10  bg-gray-100 p-8">
       <motion.h3
        initial={{ opacity: 0, x: 200 }}
        transition={{ duration: 0.5 }}
