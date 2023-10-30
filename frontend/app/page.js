@@ -12,11 +12,10 @@ import Finishes from "./components/Finishes";
 import Map from "./components/Map";
 import About from "./components/About";
 
-const images = [tiles1, tiles6, tiles3];
-
 function Home() {
-
+  const images = [tiles1, tiles6, tiles3];
   useEffect(() => {
+    
     const interval = setInterval(() => {
       setCurrentImage((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
@@ -48,9 +47,9 @@ function Home() {
       
 
       {/* Achievement */}
-      <div className=" flex flex-col  items-center">
+      <div className=" flex flex-col  items-center ">
         <div className="slider ">
-          <div className="relative h-[500px] w-[1200px]">
+          <div className="relative h-[500px]">
             <button
                   className="absolute left-0 top-[200px] text-white"
                   onClick={handlePrevious}
@@ -58,7 +57,7 @@ function Home() {
                   <AiOutlineLeftCircle />
                 </button>
                 <Image
-                  className="w-full h-full object-cover"
+                  className="w-[90vw] h-full object-cover"
                   src={images[currentImage]}
                   alt="Carousel Image"
                 />   

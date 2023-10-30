@@ -2,7 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 body{
+
   ::-webkit-scrollbar {
     width: 12px; 
     height: 7px;/* Adjust the width as desired */
@@ -46,4 +52,6 @@ body{
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.8); /* Adjust opacity value as needed */
 }
-
+.box{
+  scroll-behavior: smooth;
+}
