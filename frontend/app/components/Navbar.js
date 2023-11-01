@@ -32,7 +32,7 @@ function AdminNavbar() {
   return (
     
     <>
-      <nav className={`w-full  sticky top-0  ${ scrolled ? 'shadow-lg z-10 bg-gray-400 ' : 'bg-transparent'}`}>
+      <nav className={`w-full sticky top-0  ${ scrolled ? 'shadow-lg z-10 bg-gray-400 ' : 'bg-transparent'}`}>
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-2 md:py-1 md:block"
@@ -91,7 +91,7 @@ function AdminNavbar() {
                    >
                 <div className='flex'
                  onClick={() => setmobileDropDown(!mobiledropDown)}>
-                <div className='mr-1'>
+                <div className='mr-1 '>
                   <Link href="/" className={styles.link}> 
                   PRODUCTS
                   </Link>
@@ -103,19 +103,19 @@ function AdminNavbar() {
                 {navbar&& mobiledropDown && <div className='md:hidden'><Dropdown/></div>}
                 </div>
                 </li>
-                <li className="pr-2"
+                <li className=" pr-2 pl-4 md:pl-0 "
                  onMouseEnter={() => setDropDown(false)}>
-                  <Link href="/where" className={styles.link} >
+                  <Link href="/location" className={styles.link} >
                     WHERE TO BUY
                   </Link>
                   
                 </li>
-                <li className="pr-3 " >
+                <li className="pr-3 pl-4 md:pl-0" >
                   <Link href="/about" className={styles.link}>
                     ABOUT
                   </Link>   
                 </li>
-                <button className="pl-4 bg-blue-950 hover:bg-white text-white  px-5 py-2 border border-blue-950 hover:text-blue-950">
+                <button className="pl-4 ml-3 md:ml-0 bg-blue-950 hover:bg-white text-white  px-5 py-2 border border-blue-950 hover:text-blue-950">
                   <Link href="/explore">
                     Explore More
                   </Link>

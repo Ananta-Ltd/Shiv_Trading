@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Link from 'next/link';
 
 function Map() {
     
@@ -13,7 +14,9 @@ function Map() {
                 <h1 className=' text-3xl tracking-wider text-white'>Where to buy</h1>
                     <button 
                         className='my-4 bg-blue-950 hover:bg-white px-8 py-2 text-white hover:text-blue-950 uppercase text-sm font-bold hover:border hover:border-black'>
-                        Find our store
+                         <Link href={`${process.env.NEXT_PUBLIC_clientLocationUrl}`} target="_blank">
+                            Find our store
+                          </Link>
                     </button>
                </div>
             </div>

@@ -1,12 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 import { FaRupeeSign } from 'react-icons/fa';
+
 function page() {
   return (
-    <div className=' min-h-screen w-full'>
-       <div className='px-10 md:px-0 md:flex justify-center space-x-10'>
+    <div className=' h-[180vh] md:h-[80vh] w-full'>
+       <div className='px-10 md:px-0 flex flex-col md:flex md:flex-row justify-center items-center md:space-x-10'>
 
-          <div className='h-[300px] w-[200px] bg-white text-center rounded-xl pt-8' >
+          <div className='h-[300px] w-[200px] mb-[80px] bg-white text-center rounded-xl pt-8' >
             <h1 className='font-bold uppercase text-xl pb-6' >Basic</h1>
             <div className=' relative '>
               <div className='absolute  top-0  h-[22px] w-[103px]  bg-green-200 transform -rotate-12'></div>
@@ -26,7 +27,7 @@ function page() {
             </div>
           </div>
 
-          <div className='h-[300px] w-[200px] bg-white text-center rounded-xl pt-8' >
+          <div className='h-[300px] w-[200px] mb-[80px] bg-white text-center rounded-xl pt-8' >
             <h1 className='font-bold uppercase text-xl pb-6' >Standard</h1>
             <div className=' relative '>
               <div className='absolute  top-0  h-[22px] w-[103px]  bg-blue-200 transform -rotate-12'></div>
@@ -45,7 +46,7 @@ function page() {
               </div>
             </div>
           </div>
-          <div className='h-[300px] w-[200px] bg-white text-center rounded-xl pt-8' >
+          <div className='h-[300px] w-[200px] mb-[80px] bg-white text-center rounded-xl pt-8' >
             <h1 className='font-bold uppercase text-xl pb-6' >premium</h1>
             <div className=' relative '>
               <div className='absolute  top-0  h-[22px] w-[103px]  bg-orange-200 transform -rotate-12'></div>

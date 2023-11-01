@@ -34,7 +34,7 @@ const About = () => {
 
         </p>
       <div className='text-blue-500 p-8'>
-        <Link href="#" className={styles.link}>Read more</Link>
+        <Link href="/about" className={styles.link}>Read more</Link>
       </div>
     </div>
    </div>

@@ -26,11 +26,11 @@ function Dropdown() {
                
            </div>
            <div>
-           <Link href="products/floortiles"><h2 className='font-bold text-lg text-blue-900 hover:text-blue-950 ml-6 md:ml-0 lg:ml-0'>GRANITES AND MARBLES</h2></Link>
-                <Link href="/" className={styles.link} ><p className='py-1.5 ml-11 md:ml-0 lg:ml-0'>Rajasthani</p></Link>
-                <Link href="/" className={styles.link} ><p className='py-1.5 ml-11 md:ml-0 lg:ml-0'>South Indian</p></Link>
-               <Link href="/" className={styles.link} ><p className='py-1.5 ml-11 md:ml-0 lg:ml-0'>North Indian</p></Link>
-               <Link href="/" className="" > <h2 className='font-bold text-lg text-blue-900 hover:text-blue-950 ml-6 mt-3  md:ml-0 lg:ml-0'>SANITARY AND CP FITTINGS</h2></Link>
+           <Link href="products/granitesandmarbles"><h2 className='font-bold text-lg text-blue-900 hover:text-blue-950 ml-6 md:ml-0 lg:ml-0'>GRANITES AND MARBLES</h2></Link>
+                <Link href="/products/granitesandmarbles/Rajasthani" className={styles.link} ><p className='py-1.5 ml-11 md:ml-0 lg:ml-0'>Rajasthani</p></Link>
+                <Link href="/products/granitesandmarbles/South%20Indian" className={styles.link} ><p className='py-1.5 ml-11 md:ml-0 lg:ml-0'>South Indian</p></Link>
+               <Link href="/products/granitesandmarbles/North%20Indian" className={styles.link} ><p className='py-1.5 ml-11 md:ml-0 lg:ml-0'>North Indian</p></Link>
+               <Link href="/products/sanitaryandcp_fittings" className="" > <h2 className='font-bold text-lg text-blue-900 hover:text-blue-950 ml-6 mt-3  md:ml-0 lg:ml-0'>SANITARY AND CP FITTINGS</h2></Link>
            </div>
           
        </ul>

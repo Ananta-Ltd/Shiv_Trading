@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 function Finishes() {
   return (
@@ -25,7 +26,7 @@ function Finishes() {
                 </motion.p>
                 <button 
                     className='my-2 md:m-8 bg-blue-950 hover:bg-white px-8 py-2 text-white hover:text-blue-950 uppercase text-sm hover:border hover:border-black'> 
-                        Know More
+                        <Link href="/explore">Know More</Link>
                     </button>
             </div>
             <motion.div

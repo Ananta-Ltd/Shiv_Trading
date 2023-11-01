@@ -1,6 +1,6 @@
 "use client"
 import Search_By_ProductName from '@/app/components/Search_by_productname';
-import Search_BY_Size from '@/app/components/Search_by_Size';
+import Search_BY_Size_Floor from '@/app/components/Search_by_size_Floor';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 
@@ -47,7 +47,7 @@ export default function RootLayout({children}){
                 </p>
             </div>
             <div className='pt-6'> <Search_By_ProductName/></div>
-            <div className='pt-6'> <Search_BY_Size/></div>
+            <div className='pt-6'> <Search_BY_Size_Floor/></div>
        </div>
        <div>{children}</div>
     </div>

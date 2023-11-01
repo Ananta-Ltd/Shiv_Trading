@@ -56,7 +56,7 @@ function Home() {
                 <AiOutlineLeftCircle />
               </button>
               <Image
-                className="h-[475px] w-[1200px] object-cover"
+                className="h-[475px] sm:w-[90vw] md:w-[90vw] lg:w-[1200px] object-cover"
                 src={images[currentImage]}
                 alt="Carousel Image"
               />   

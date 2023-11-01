@@ -22,7 +22,8 @@ export default function page() {
   const searchParams = useSearchParams();
   const size = searchParams.get("value");
   console.log(size);
-  const url = size ? `${process.env.NEXT_PUBLIC_HOST}/granite/photos/?granite=${granite}&size=${size}` : `${process.env.NEXT_PUBLIC_HOST}/granite/photos/?granite=${granite}`;
+  const url = size ? `${process.env.NEXT_PUBLIC_HOST}/granite/photos/?granite=${granite}&thick=${size}` : 
+  `${process.env.NEXT_PUBLIC_HOST}/granite/photos/?granite=${granite}`;
   
 
   useEffect(() => {
@@ -59,14 +60,14 @@ export default function page() {
     <div className="p-6 md:ml-0 m-2 h-auto grid grid-cols-1 ml-16 gap-6 lg:grid lg:grid-cols-3 lg:gap-8 md:grid md:grid-cols-1 md:gap-8 overflow-hidden">
     {data?.map((photo, index) => (
          <div
-           className="border-2 border-gray-100 hover:shadow-lg hover:shadow-gray-400/50 hover:ring-2 hover:ring-gray-200 h-[250px] w-[250px] hover:scale-105 transition-transform duration-300"
-           onClick={() => handlePhotoClick(photo.url)}
+           className="border-2 border-gray-200 hover:shadow-lg hover:shadow-gray-400/50 hover:ring-2 hover:ring-gray-200 h-[250px] w-[250px] hover:scale-105 transition-transform duration-300"
+           onClick={() => handlePhotoClick(photo)}
            key={index}
          >
            <div className='flex items-center justify-center'>
              <img src={photo.url} alt="floor" className='h-[200px]' />
            </div>
-           <div className='bg-gray-500 h-[50px] text-center'>
+           <div className=' h-[50px] text-center'>
              <p className='pt-3'>{photo.size}</p>
            </div>
          </div>
@@ -83,11 +84,13 @@ export default function page() {
        <div className='flex justify-center  '>
        <div className='flex-col justify-center h-[400px] w-[500px]'>
          <img
-              src={selectedPhoto}
+              src={selectedPhoto.url}
               alt="large-view"
               className='md:w-[500px] md:h-[350px] w-full h-[300px] '
             />
-          <p className='bg-gray-300 text-center py-4 mt-0 flex justify-center'><span className='pt-1 px-2'><CiLocationOn/></span>Location</p>
+          <p className='bg-gray-300 text-center py-4 mt-0 flex justify-center text-sm'>
+            {selectedPhoto.description}
+          </p>
          </div>
        </div>
       </div>

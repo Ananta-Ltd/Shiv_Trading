@@ -1,81 +1,100 @@
 "use client"
 import React from 'react'
 import { useRouter } from 'next/navigation';
-import {usePathname} from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 function Search_by_productname() {
 
-    const currentPage = usePathname();
-    const router = useRouter();
+  const currentPage = usePathname();
+  const router = useRouter();
 
-    const handleCheckboxChangewalltiles = () => {
-      router.push('/products/walltiles');
-    };
-    const handleCheckboxChangefloortiles = () => {
-      router.push('/products/floortiles');
-    };
-    const handleCheckboxGranite = () => {
-      router.push('/products/granitesandmarbles');
-    };
-    const handleCheckboxCp_fittings = () => {
-      router.push('/products/sanitaryandcp_fittings');
-    };
+  const handleCheckboxChangewalltiles = () => {
+    router.push('/products/walltiles');
+  };
+  const handleCheckboxChangefloortiles = () => {
+    router.push('/products/floortiles');
+  };
+  const handleCheckboxGranite = () => {
+    router.push('/products/granitesandmarbles');
+  };
+  const handleCheckboxCp_fittings = () => {
+    router.push('/products/sanitaryandcp_fittings');
+  };
 
-    
+
   return (
     <div>
       <div className=' mx-5 mb-0 p-2 text-sm w-[400px]'>
         <h2 className='bg-gray-400 p-1 shadow-sm'>Search By Category</h2>
         <div className=' my-1'>
-        <label>
-        <input
-         className="mx-2"
-          type="checkbox"
-          checked={currentPage === "/products/walltiles" || currentPage === "/products/walltiles/bathroom" || currentPage === "/products/walltiles/kitchen" || currentPage === "/products/walltiles/livingroom" || currentPage === "/products/walltiles/outdoor" || currentPage === "/products/walltiles/bedroom"}
-          onChange={handleCheckboxChangewalltiles}
-        />
-        Wall Tiles
-      </label>
+          <label>
+            <input
+              className="mx-2"
+              type="checkbox"
+              checked={currentPage === "/products/walltiles"
+                || currentPage === "/products/walltiles/bathroom"
+                || currentPage === "/products/walltiles/kitchen"
+                || currentPage === "/products/walltiles/livingroom"
+                || currentPage === "/products/walltiles/outdoor"
+                || currentPage === "/products/walltiles/bedroom"}
+              onChange={handleCheckboxChangewalltiles}
+            />
+            Wall Tiles
+          </label>
         </div>
-        <hr/>
+        <hr />
         <div className=' my-1'>
-        <label>
-        <input
-         className="mx-2"
-          type="checkbox"
-          checked={currentPage === "/products/floortiles" || currentPage === "/products/floortiles/bathroom" || currentPage === "/products/floortiles/kitchen" || currentPage === "/products/floortiles/livingroom" || currentPage === "/products/floortiles/outdoor" || currentPage === "/products/floortiles/bedroom"}
-          onChange={handleCheckboxChangefloortiles}
-        />
-        Floor Tiles
-      </label>
+          <label>
+            <input
+              className="mx-2"
+              type="checkbox"
+              checked={currentPage === "/products/floortiles"
+                || currentPage === "/products/floortiles/bathroom"
+                || currentPage === "/products/floortiles/kitchen"
+                || currentPage === "/products/floortiles/livingroom"
+                || currentPage === "/products/floortiles/outdoor"
+                || currentPage === "/products/floortiles/bedroom"}
+              onChange={handleCheckboxChangefloortiles}
+            />
+            Floor Tiles
+          </label>
         </div>
-        <hr/>
+        <hr />
         <div className=' my-1'>
-        <label>
-        <input
-         className="mx-2"
-          type="checkbox"
-          checked={(currentPage==="/products/sanitaryandcp_fittings" )? true:false}
-          onChange={handleCheckboxCp_fittings}
-        />
-        Sanitary and C.P. Fittings
-      </label>
+          <label>
+            <input
+              className="mx-2"
+              type="checkbox"
+              checked={currentPage === "/products/sanitaryandcp_fittings"
+                || currentPage === "/products/sanitaryandcp_fittings/Single%20Piece%20Basin"
+                || currentPage === "/products/sanitaryandcp_fittings/Two%20Piece%20Basin"
+                || currentPage === "/products/sanitaryandcp_fittings/Counter%20Basin"
+                || currentPage === "/products/sanitaryandcp_fittings/Wall%20Hung%20Commod"
+                || currentPage === "/products/sanitaryandcp_fittings/Single%20Vacuum%20Commod"
+                || currentPage === "/products/sanitaryandcp_fittings/Double%20Vacuum%20Commod"}
+              onChange={handleCheckboxCp_fittings}
+            />
+            Sanitary and C.P. Fittings
+          </label>
         </div>
-        <hr/>
+        <hr />
         <div className=' my-1'>
-        <label>
-        <input
-         className="mx-2"
-          type="checkbox"
-          checked={(currentPage==="/products/granitesandmarbles" )? true:false}
-          onChange={handleCheckboxGranite}
-        />
-        Granite and Marbles
-      </label>
+          <label>
+            <input
+              className="mx-2"
+              type="checkbox"
+              checked={currentPage === "/products/granitesandmarbles"
+                || currentPage === "/products/granitesandmarbles/Rajasthani"
+                || currentPage === "/products/granitesandmarbles/South%20Indian"
+                || currentPage === "/products/granitesandmarbles/North%20Indian"}
+              onChange={handleCheckboxGranite}
+            />
+            Granite and Marbles
+          </label>
         </div>
       </div>
     </div>
   )
 }
 
-export default Search_by_productname
+export default Search_by_productname;

@@ -34,8 +34,8 @@ const LoginPage = () => {
    <>
     <AuthLayout>
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="max-w-md w-full py-10 px-6 bg-white shadow-md rounded-md">
-        <h2 className="text-2xl font-bold mb-6">Login</h2>
+      <div className="max-w-md w-full py-10 px-6 bg-white shadow-md ">
+        <h2 className="text-2xl font-bold mb-6 ">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4 relative">
             <input
@@ -65,7 +65,7 @@ const LoginPage = () => {
           {error &&<p className='text-red-500 pb-3 '> wrong username or password</p>}
           <button
             type="submit"
-            className="bg-black hover:bg-gray-600 text-white font-medium tracking-wider py-2 px-4 rounded-md"
+            className="bg-blue-950 hover:bg-white hover:text-black text-white font-medium tracking-wider py-2 rounded-md px-4 border border-blue-950"
           >
             Login
           </button>
