@@ -87,59 +87,79 @@ function index() {
       console.log('Tranding:', tranding);
       console.log('Description:', description);
 
-    //   const config = {
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data',
-    //       maxBodyLength: Infinity,
-    //       Authorization: `Bearer ${token}`,
-    //     }
-    //   };
+      // const config = {
+      //   headers: {
+      //     'Content-Type': 'multipart/form-data',
+      //     maxBodyLength: Infinity,
+      //     Authorization: `Bearer ${token}`,
+      //   }
+      // };
 
-    //   const formData = new FormData();
-    //   formData.append("up_photo", selectedTilesFiles);
-    //   formData.append("description",description)
+      // const formData = new FormData();
+      // formData.append("up_photo", selectedTilesFiles);
+      // formData.append("description",description)
 
-    //   await axios.post(`${process.env.NEXT_PUBLIC_HOST}/upload/tiles/photos/?product=${product}&size=${size}&room=${room}&trending=${tranding}`,formData,config,)
-    //     .then(response => {
-    //       console.log(response.data);
-    //       setSelectedTilesFiles([]);
-    //       toast.success('Product uploaded successfully!');
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //       toast.error('Error uploading product: ' + error.message);
-    //     });
-    // } else {
-    //   console.log('No files selected.');
-    // }
+      // await axios.post(`${process.env.NEXT_PUBLIC_HOST}/upload/tiles/photos/?product=${product}&size=${size}&room=${room}&trending=${tranding}`,formData,config,)
+      //   .then(response => {
+      //     console.log(response.data);
+      //     setSelectedTilesFiles([]);
+      //     toast.success('Product uploaded successfully!');
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //     toast.error('Error uploading product: ' + error.message);
+      //   });
 
-    const axios = require('axios');
-const FormData = require('form-data');
-let data = new FormData();
-data.append('up_photo', selectedTilesFiles);
-data.append('description', description);
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${token}`);
+      
+      var formdata = new FormData();
+      formdata.append("up_photo", selectedTilesFiles);
+      formdata.append("description", "1 year of warranty");
+      
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow'
+      };
+      
+      fetch("http://shiv-trading.com/backend/upload/tiles/photos/?product=WallTiles&size=12×18inch&room=Kitchen&trending=False", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
 
-let config = {
-  method: 'post',
-  maxBodyLength: Infinity,
-  url: `${process.env.NEXT_PUBLIC_HOST}/upload/tiles/photos/?product=${product}&size=${size}&room=${room}&trending=${tranding}`,
-  headers: { 
-    'Authorization': `Bearer ${token}`, 
+    } else {
+      console.log('No files selected.');
+    }
+
+//     const axios = require('axios');
+// const FormData = require('form-data');
+// let data = new FormData();
+// data.append('up_photo', selectedTilesFiles);
+// data.append('description', description);
+
+// let config = {
+//   method: 'post',
+//   maxBodyLength: Infinity,
+//   url: `${process.env.NEXT_PUBLIC_HOST}/upload/tiles/photos/?product=${product}&size=${size}&room=${room}&trending=${tranding}`,
+//   headers: { 
+//     'Authorization': `Bearer ${token}`, 
   
-  },
-  data : data
-};
+//   },
+//   data : data
+// };
 
-axios.request(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-})
-.catch((error) => {
-  console.log(error);
-});
+// axios.request(config)
+// .then((response) => {
+//   console.log(JSON.stringify(response.data));
+// })
+// .catch((error) => {
+//   console.log(error);
+// });
 
 
-  };
+//   };
 }
 
   const handleUploadCPFittings = async () => {
@@ -259,8 +279,8 @@ axios.request(config)
               className="w-full px-4 py-2 mb-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Select a product</option>
-              <option value="Wall Tiles">Wall Tiles</option>
-              <option value="Floor Tiles">Floor Tiles</option>
+              <option value="WallTiles">Wall Tiles</option>
+              <option value="FloorTiles">Floor Tiles</option>
             </select>
             <select
               value={size}

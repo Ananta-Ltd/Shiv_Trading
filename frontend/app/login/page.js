@@ -35,14 +35,14 @@ const LoginPage = () => {
     <AuthLayout>
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="max-w-md w-full py-10 px-6 bg-white shadow-md ">
-        <h2 className="text-2xl font-bold mb-6 ">Login</h2>
+        <h2 className="text-2xl font-bold mb-6 text-blue-500">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4 relative">
             <input
               type="text"
               required
               placeholder='Username'
-              className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider focus:outline-none focus:border-gray-500"
+              className="border-blue-200 border-2  px-4 py-2 w-full tracking-wider focus:outline-none focus:border-blue-500"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -53,7 +53,7 @@ const LoginPage = () => {
               placeholder='password'
               required
               minlength="6"
-              className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider  focus:outline-none focus:border-gray-500"
+              className="border-blue-200 border-2  px-4 py-2 w-full tracking-wider  focus:outline-none focus:border-blue-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -65,7 +65,7 @@ const LoginPage = () => {
           {error &&<p className='text-red-500 pb-3 '> wrong username or password</p>}
           <button
             type="submit"
-            className="bg-blue-950 hover:bg-white hover:text-black text-white font-medium tracking-wider py-2 rounded-md px-4 border border-blue-950"
+            className="bg-blue-950 hover:bg-white hover:text-black text-white font-medium tracking-wider py-2  px-4 border border-blue-950"
           >
             Login
           </button>
