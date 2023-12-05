@@ -38,8 +38,8 @@ function index() {
   };
 
   const handleFinishedFileChange = (event) => {
-    const files = event.target.files[0];
-    setSelectedFinishedFiles(event.target.files[0]);
+    const files = event.target.files;
+    setSelectedFinishedFiles(files);
   };
 
   const handleProductChange = (event) => {
@@ -80,86 +80,44 @@ function index() {
   const handleUploadTiles = async () => {
     if (selectedTilesFiles.length > 0) {
       // Perform the upload logic here
-      console.log('Uploading files:', selectedTilesFiles);
+      console.log('Uploading files:', selectedTilesFiles[0]);
       console.log('Product:', product);
       console.log('Size:', size);
       console.log('Room:', room);
       console.log('Tranding:', tranding);
       console.log('Description:', description);
 
-      // const config = {
-      //   headers: {
-      //     'Content-Type': 'multipart/form-data',
-      //     maxBodyLength: Infinity,
-      //     Authorization: `Bearer ${token}`,
-      //   }
-      // };
-
-      // const formData = new FormData();
-      // formData.append("up_photo", selectedTilesFiles);
-      // formData.append("description",description)
-
-      // await axios.post(`${process.env.NEXT_PUBLIC_HOST}/upload/tiles/photos/?product=${product}&size=${size}&room=${room}&trending=${tranding}`,formData,config,)
-      //   .then(response => {
-      //     console.log(response.data);
-      //     setSelectedTilesFiles([]);
-      //     toast.success('Product uploaded successfully!');
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //     toast.error('Error uploading product: ' + error.message);
-      //   });
-
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", `Bearer ${token}`);
-      
-      var formdata = new FormData();
-      formdata.append("up_photo", selectedTilesFiles);
-      formdata.append("description", "1 year of warranty");
-      
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: formdata,
-        redirect: 'follow'
+      const config = {
+        headers: {
+          maxBodyLength: Infinity,
+          Authorization: `Bearer ${token}`,
+        }
       };
-      
-      fetch("http://shiv-trading.com/backend/upload/tiles/photos/?product=WallTiles&size=12×18inch&room=Kitchen&trending=False", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+
+      const formData = new FormData();
+      formData.append('up_photo', selectedTilesFiles[0]);
+      formData.append('description',description)
+
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_HOST}/upload/tiles/photos/?product=${product}&size=${size}&room=${room}&trending=${tranding}`,
+        formData,
+        config
+        )
+        .then(response => {
+          console.log(response.data);
+          setSelectedTilesFiles([]);
+          toast.success('Product uploaded successfully!');
+        })
+        .catch(error => {
+          console.log(error);
+          toast.error('Error uploading product: ' + error.message);
+        });
 
     } else {
       console.log('No files selected.');
     }
 
-//     const axios = require('axios');
-// const FormData = require('form-data');
-// let data = new FormData();
-// data.append('up_photo', selectedTilesFiles);
-// data.append('description', description);
 
-// let config = {
-//   method: 'post',
-//   maxBodyLength: Infinity,
-//   url: `${process.env.NEXT_PUBLIC_HOST}/upload/tiles/photos/?product=${product}&size=${size}&room=${room}&trending=${tranding}`,
-//   headers: { 
-//     'Authorization': `Bearer ${token}`, 
-  
-//   },
-//   data : data
-// };
-
-// axios.request(config)
-// .then((response) => {
-//   console.log(JSON.stringify(response.data));
-// })
-// .catch((error) => {
-//   console.log(error);
-// });
-
-
-//   };
 }
 
   const handleUploadCPFittings = async () => {
@@ -175,9 +133,14 @@ function index() {
         }
       };
       const formData = new FormData();
-      formData.append("up_photo", selectedCPFittingsFiles);
+      formData.append("up_photo", selectedCPFittingsFiles[0]);
+      formData.append('description',description)
 
-      await axios.post(`${process.env.NEXT_PUBLIC_HOST}/upload/cpfittings/photos/?product=${product}&fitting_name=${fitting_name}`, formData, config,)
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_HOST}/upload/cpfittings/photos/?product=${product}&fitting_name=${fitting_name}`,
+         formData,
+          config
+        )
         .then(response => {
           console.log(response.data);
           setSelectedCPFittingsFiles([]);
@@ -206,9 +169,14 @@ function index() {
         }
       };
       const formData = new FormData();
-      formData.append("up_photo", selectedGranite_MarbleFiles);
+      formData.append("up_photo", selectedGranite_MarbleFiles[0]);
+      formData.append('description',description);
 
-      await axios.post(`${process.env.NEXT_PUBLIC_HOST}/upload/granite&marble/photos/?product=${product}&granite=${granite}&graniteSize=${graniteSize}`, formData, config,)
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_HOST}/upload/granite&marble/photos/?product=${product}&granite=${granite}&thick=${graniteSize}&trending=${tranding}`,
+         formData,
+          config
+        )
         .then(response => {
           console.log(response.data);
           setSelectedGranite_MarbleFiles([]);
@@ -236,9 +204,14 @@ function index() {
       }
     };
     const formData = new FormData();
-    formData.append("up_photo", selectedFinishedFiles);
+    formData.append("up_photo", selectedFinishedFiles[0]);
+    formData.append('description',description);
 
-    await axios.post(`${process.env.NEXT_PUBLIC_HOST}/upload/finish/photos/?plan=${plan}`, formData, config)
+    await axios.post(
+    `${process.env.NEXT_PUBLIC_HOST}/upload/finish/photos/?plan=${plan}`,
+     formData, 
+     config
+     )
       .then(response => {
         console.log(response.data)
         setSelectedFinishedFiles([]);
@@ -279,8 +252,8 @@ function index() {
               className="w-full px-4 py-2 mb-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Select a product</option>
-              <option value="WallTiles">Wall Tiles</option>
-              <option value="FloorTiles">Floor Tiles</option>
+              <option value="Wall Tiles">Wall Tiles</option>
+              <option value="Floor Tiles">Floor Tiles</option>
             </select>
             <select
               value={size}
@@ -364,7 +337,13 @@ function index() {
               <option value="Double Vacuum Commote">Double Vacuum Commote</option>
               <option value="Single Vacuum Commote">Single Vacuum Commote</option>
             </select>
-
+            <textarea
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              placeholder='Description'
+              rows="4"
+              value={description}
+              onChange={handleDescription}
+            />
             <select
               value={tranding}
               onChange={handleTranding}
@@ -423,7 +402,13 @@ function index() {
               <option value="15mm">15 mm </option>
               <option value="18mm">18 mm </option>
             </select>
-
+            <textarea
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              placeholder='Description'
+              rows="4"
+              value={description}
+              onChange={handleDescription}
+            />
             <select
               value={tranding}
               onChange={handleTranding}
@@ -470,7 +455,13 @@ function index() {
               <option value="Standard">Standard</option>
               <option value="Premium">Premium</option>
             </select>
-
+            <textarea
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              placeholder='Description'
+              rows="4"
+              value={description}
+              onChange={handleDescription}
+            />
             <button
               onClick={handleFinishedUpload}
               className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-950"
