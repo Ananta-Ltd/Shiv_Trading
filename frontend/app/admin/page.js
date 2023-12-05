@@ -21,7 +21,7 @@ function index() {
   const [plan, setPlan] = useState('');
   const { data: session } = useSession();
   const token = session?.user.token;
-  
+
   const handleTilesFileChange = (event) => {
     const files = event.target.files;
     setSelectedTilesFiles(Array.from(files));
@@ -96,13 +96,13 @@ function index() {
 
       const formData = new FormData();
       formData.append('up_photo', selectedTilesFiles[0]);
-      formData.append('description',description)
+      formData.append('description', description)
 
       await axios.post(
         `${process.env.NEXT_PUBLIC_HOST}/upload/tiles/photos/?product=${product}&size=${size}&room=${room}&trending=${tranding}`,
         formData,
         config
-        )
+      )
         .then(response => {
           console.log(response.data);
           setSelectedTilesFiles([]);
@@ -118,7 +118,7 @@ function index() {
     }
 
 
-}
+  }
 
   const handleUploadCPFittings = async () => {
     if (selectedCPFittingsFiles.length > 0) {
@@ -134,13 +134,13 @@ function index() {
       };
       const formData = new FormData();
       formData.append("up_photo", selectedCPFittingsFiles[0]);
-      formData.append('description',description)
+      formData.append('description', description)
 
       await axios.post(
         `${process.env.NEXT_PUBLIC_HOST}/upload/cpfittings/photos/?product=${product}&fitting_name=${fitting_name}`,
-         formData,
-          config
-        )
+        formData,
+        config
+      )
         .then(response => {
           console.log(response.data);
           setSelectedCPFittingsFiles([]);
@@ -170,13 +170,13 @@ function index() {
       };
       const formData = new FormData();
       formData.append("up_photo", selectedGranite_MarbleFiles[0]);
-      formData.append('description',description);
+      formData.append('description', description);
 
       await axios.post(
         `${process.env.NEXT_PUBLIC_HOST}/upload/granite&marble/photos/?product=${product}&granite=${granite}&thick=${graniteSize}&trending=${tranding}`,
-         formData,
-          config
-        )
+        formData,
+        config
+      )
         .then(response => {
           console.log(response.data);
           setSelectedGranite_MarbleFiles([]);
@@ -205,13 +205,13 @@ function index() {
     };
     const formData = new FormData();
     formData.append("up_photo", selectedFinishedFiles[0]);
-    formData.append('description',description);
+    formData.append('description', description);
 
     await axios.post(
-    `${process.env.NEXT_PUBLIC_HOST}/upload/finish/photos/?plan=${plan}`,
-     formData, 
-     config
-     )
+      `${process.env.NEXT_PUBLIC_HOST}/upload/finish/photos/?plan=${plan}`,
+      formData,
+      config
+    )
       .then(response => {
         console.log(response.data)
         setSelectedFinishedFiles([]);
@@ -229,10 +229,10 @@ function index() {
     <div className=' bg-gray-200 w-full min-h-screen'>
       {/* Upload Tiles */}
       <div className='flex justify-center pt-20'>
-        <label 
-        htmlFor="uploadTilesButton" 
-        className='flex-col bg-green-200 border-2 border-green-600 w-[80%] rounded-md shadow-md px-4 py-3 font-bold'> 
-        Upload tiles photo
+        <label
+          htmlFor="uploadTilesButton"
+          className='flex-col bg-green-200 border-2 border-green-600 w-[80%] rounded-md shadow-md px-4 py-3 font-bold'>
+          Upload tiles photo
           <input
             type="file"
             accept="image/*"

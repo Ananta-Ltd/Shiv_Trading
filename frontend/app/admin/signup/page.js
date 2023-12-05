@@ -54,7 +54,7 @@ const SignupPage = () => {
    <>
     <AuthLayout>
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="max-w-md w-full py-10 px-6 bg-white shadow-md rounded-md">
+      <div className="max-w-md w-full py-10 px-6 md:bg-white shadow-md rounded-md">
         <h2 className="text-2xl font-bold mb-6 ">Sign up</h2>
         <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -62,7 +62,7 @@ const SignupPage = () => {
               type="number"
               placeholder='Country Code'
               required
-              className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider focus:outline-none focus:border-gray-500"
+              className="border-blue-200 border-2 px-4 py-2 w-full tracking-wider focus:outline-none focus:border-blue-500"
               value={country_code}
               onChange={(e) => setCountry_code(e.target.value)}
             />
@@ -72,7 +72,7 @@ const SignupPage = () => {
               type="number"
               placeholder='Number'
               required
-              className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider focus:outline-none focus:border-gray-500"
+              className="border-blue-200 border-2 px-4 py-2 w-full tracking-wider focus:outline-none focus:border-blue-500"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -80,7 +80,7 @@ const SignupPage = () => {
           </div>
           <div className="mb-4">
             <select
-            className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider focus:outline-none focus:border-gray-500"
+            className="border-blue-200 border-2 px-4 py-2 w-full tracking-wider focus:outline-none focus:border-blue-500"
               id="dropdown"
               required
               value={plan}
@@ -97,7 +97,7 @@ const SignupPage = () => {
               type="email"
               placeholder='Email'
               required
-              className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider focus:outline-none focus:border-blue-500"
+              className="border-blue-200 border-2 px-4 py-2 w-full tracking-wider focus:outline-none focus:border-blue-500"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -108,7 +108,7 @@ const SignupPage = () => {
               placeholder='password'
               required
               minlength="6"
-              className="border-gray-200 border-2 rounded-md px-4 py-2 w-full tracking-wider focus:outline-none focus:border-blue-500"
+              className="border-blue-200 border-2 px-4 py-2 w-full tracking-wider focus:outline-none focus:border-blue-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -127,7 +127,7 @@ const SignupPage = () => {
           {error &&<p className='text-red-500 mb-4'>{error}</p>}    
         <button
             type="submit"
-            className="bg-black hover:bg-gray-600 text-white font-medium tracking-wider py-2 px-4 rounded-md"
+            className="bg-blue-950 hover:bg-blue-600 text-white font-medium tracking-wider py-2 px-4"
           >
             Sign up
           </button>

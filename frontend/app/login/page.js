@@ -8,12 +8,14 @@ import { signIn} from 'next-auth/react';
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(false);
   const router = useRouter();
  
   const handleSubmit = async(e) => {
     e.preventDefault();
+    setLoading(true);
      const result = await signIn("credentials",{
           username:username,
           password:password,
@@ -23,9 +25,11 @@ const LoginPage = () => {
     
      if(result.ok===false){
       setError(true);
+      setLoading(false);
      }else{
       setError(false);
-      router.push('./admin')
+      router.push('./admin');
+      setLoading(false);
      }
     
 }
@@ -34,7 +38,7 @@ const LoginPage = () => {
    <>
     <AuthLayout>
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="max-w-md w-full py-10 px-6 bg-white shadow-md ">
+      <div className="max-w-md w-full py-10 px-6 md:bg-white md:shadow-md ">
         <h2 className="text-2xl font-bold mb-6 text-blue-500">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4 relative">
@@ -70,6 +74,9 @@ const LoginPage = () => {
             Login
           </button>
         </form>
+      </div>
+      <div>
+        {loading &&<p>Loading....</p>}
       </div>
     </div>
     </AuthLayout>
