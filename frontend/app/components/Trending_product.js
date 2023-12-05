@@ -20,7 +20,7 @@ function Trending() {
     };
 
     fetchPhotos();
-  }, []);
+  }, [image]);
 
    const scrollLeft = () => {
     let width = box.clientWidth;
@@ -34,7 +34,7 @@ function Trending() {
   
   return (
     <>
-    <div className="relative  h-screen m-10  bg-gray-100 p-8">
+    <div className="relative  m-10  bg-gray-100 p-8 pb-0">
       <motion.h3
        initial={{ opacity: 0, x: 200 }}
        transition={{ duration: 0.5 }}
@@ -54,7 +54,7 @@ function Trending() {
       viewport={{ once: true }}
       className=" h-[80vh] w-full py-4  box flex overflow-hidden">
             <button
-              className="absolute left-1 top-[40vh] bg-white h-10 w-10 rounded-[25px] flex justify-center items-center shadow-lg hover:bg-gray-100 scroll-button cursor-pointer"
+              className="absolute left-1 top-[52vh] md:top-[42vh] bg-white h-10 w-10 rounded-[25px] flex justify-center items-center shadow-lg hover:bg-gray-100 scroll-button cursor-pointer"
             onClick={scrollLeft} >
               <AiOutlineLeft/>
             </button>
@@ -62,11 +62,11 @@ function Trending() {
            {image.map((photo, index) => (   
               <div className=" h-[80vh] w-[300px] md:w-[300px] lg:w-[29vw]"> 
               <img src={photo.url} key={index} alt="wall"  className='  object-cover h-[60vh] w-full' />   
-              <p className=" text-center text-sm text-gray-400 py-4">{photo.description}</p>  
+              <p className=" text-left text-sm text-gray-400 font-bold py-4">{photo.description}</p>  
               </div> ))}
          </div>
             <button
-              className="absolute right-1 top-[40vh]  bg-white h-10 w-10 rounded-[25px] flex justify-center items-center shadow-lg hover:bg-gray-100 scroll-button cursor-pointer"  
+              className="absolute right-1 top-[52vh]  md:top-[42vh]  bg-white h-10 w-10 rounded-[25px] flex justify-center items-center shadow-lg hover:bg-gray-100 scroll-button cursor-pointer"  
              onClick={scrollRight}>
               <AiOutlineRight/>
             </button>

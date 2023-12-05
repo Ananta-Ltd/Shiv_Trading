@@ -30,7 +30,7 @@ export default function RootLayout({children}){
         <Link href="/products/granitesandmarbles/Rajasthani"><button className={`px-3 py-1 hover:bg-blue-900 ${isActive==="Rajasthani"? "bg-blue-900":""}`}>Rajasthani</button> </Link>
         <Link href="/products/granitesandmarbles/South Indian">
         <div className='flex '>
-        <button className={`px-3 py-1  hover:bg-blue-900  ${isActive==="South%20Indian<"? "bg-blue-900":""}`}>South Indian</button>
+        <button className={`px-3 py-1  hover:bg-blue-900  ${isActive==="South%20Indian"? "bg-blue-900":""}`}>South Indian</button>
          <div className='h-full w-[0.5px] bg-white absolute center'></div>
         </div>
         </Link>

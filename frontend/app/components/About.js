@@ -29,7 +29,7 @@ const About = () => {
        transition={{ duration: 2}}
        whileInView={{ opacity: 1, y: 0 }}
        viewport={{ once: true }}
-        className=' text-2xl tracking-wide px-8 pt-3 text-gray-600'> Designer Wall Tiles India for Bathroom & Kitchen</motion.h1>
+        className=' text-2xl tracking-wide px-8 pt-3 text-gray-600'> Designer Wall Tiles Nepal and India for Bathroom & Kitchen</motion.h1>
         <p className='p-8 text-gray-600'>Our mesmerizing range of designer bathroom & kitchen floor and wall tiles have a luxurious appeal and seem to have been struck with afflatus. The premier collection is a showstopper and has the ability to make any dimension look grand. Every single piece of tile from our range of designer bathroom & kitchen floor and wall tiles has a compelling aura. The matt finish tiles for kitchen from our collection fit perfectly with modern day designs while our rustic kitchen wall tiles blend easily with every surrounding.  
 
         </p>
