@@ -4,8 +4,13 @@ import { motion } from "framer-motion";
 
 function Trending() {
   const [image, setimage] = useState([]);
+  const [box, setBox] = useState();
   const url = `${process.env.NEXT_PUBLIC_HOST}/trending/products/`;
-  let box = document.querySelector(".box");
+
+  useEffect(() => {
+    setBox( document.querySelector(".box"))
+    console.log(box);
+  }, []);
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -20,7 +25,7 @@ function Trending() {
     };
 
     fetchPhotos();
-  }, [image]);
+  }, []);
 
    const scrollLeft = () => {
     let width = box.clientWidth;
@@ -60,8 +65,8 @@ function Trending() {
             </button>
          <div className=" flex h-[80vh] gap-2 ">
            {image.map((photo, index) => (   
-              <div className=" h-[80vh] w-[300px] md:w-[300px] lg:w-[29vw]"> 
-              <img src={photo.url} key={index} alt="wall"  className='  object-cover h-[60vh] w-full' />   
+              <div  key={index} className=" h-[80vh] w-[300px] md:w-[300px] lg:w-[29vw]"> 
+              <img src={photo.url} alt="wall"  className='  object-cover h-[60vh] w-full' />   
               <p className=" text-left text-sm text-gray-400 font-bold py-4">{photo.description}</p>  
               </div> ))}
          </div>

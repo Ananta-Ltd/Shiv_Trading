@@ -34,7 +34,7 @@ function Products() {
     };
 
     fetchData();
-  }, [wallTiles]);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,7 +50,7 @@ function Products() {
     };
 
     fetchData();
-  }, [floorTiles]);
+  }, []);
 
 
   if (loading) return <h1>LOADING...</h1>;

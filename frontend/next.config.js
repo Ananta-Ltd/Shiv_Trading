@@ -12,19 +12,11 @@ module.exports = {
     // ...
   
     // Enable CSS modules
-    cssModules: true,
+    // cssModules: true,
   
     // Enable CSS import from node_modules
-    cssLoaderOptions: {
-      importLoaders: 1,
-      localIdentName: '[local]',
-    },
+    // cssLoaderOptions: {
+    //   importLoaders: 1,
+    //   localIdentName: '[local]',
+    // },
   };
-  
-  
-  
-  
-  
-  
-  
-  
